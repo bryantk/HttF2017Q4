@@ -12,10 +12,20 @@ public class GNM : NetworkManager
 	private ClientData _clientData;
 	private int _myConnectionId;
 
+	public static GNM Instance;
 
 	public bool IsServer { get { return _serverData != null; } }
 	public bool IsClient { get { return _clientData != null; } }
 
+	private Dictionary<int, GameObject> _playerObjects = new Dictionary<int, GameObject>();
+
+
+	void Awake()
+	{
+		if (Instance != null)
+			Destroy(this);
+		Instance = this;
+	}
 
 	void OnGUI()
 	{
@@ -28,10 +38,16 @@ public class GNM : NetworkManager
 		if (string.IsNullOrEmpty(mesage)) return;
 
 
-		SendMessage(MyMsgType.Hello, mesage);
+		SendData(ILMsgType.Hello, mesage);
 	}
 
-	public void SendMessage(short type, string data, int sourceConnection = 0)
+	/// <summary>
+	/// Send a message to all clients (or server first if you are a client)
+	/// </summary>
+	/// <param name="type"></param>
+	/// <param name="data"></param>
+	/// <param name="sourceConnection"></param>
+	public void SendData(short type, string data, int sourceConnection = 0)
 	{
 		if (client == null) return;
 
@@ -41,14 +57,14 @@ public class GNM : NetworkManager
 		};
 		if (IsServer)
 		{
-			Debug.Log("Sending server message to all");
-			NetworkServer.SendToAll(MyMsgType.Hello, message);
+			Debug.Log("Sending server message to all on behalf of " + sourceConnection + ": " + type + " - " + data);
+			NetworkServer.SendToAll(type, message);
 		}
 		else
 		{
 			Debug.Log("CLient sending server message");
 			message.SourceClient = _myConnectionId;
-			client.Send(MyMsgType.Hello, message);
+			client.Send(ILMsgType.Hello, message);
 		}
 			
 	}
@@ -62,7 +78,13 @@ public class GNM : NetworkManager
 		DataMessage msg = netMsg.ReadMessage<DataMessage>();
 
 		if (msg.SourceClient == _myConnectionId) return;
-		Debug.LogWarning("Client GOT message: " + msg.message + "  from client " + msg.SourceClient);
+
+		Debug.Log("Got message from " + msg.SourceClient + " - " + msg.message);
+		// DO STUFF WITH THE MESSAGE
+		if (netMsg.msgType == ILMsgType.SetPos)
+		{
+			
+		}
 
 	}
 
@@ -73,7 +95,7 @@ public class GNM : NetworkManager
 		Debug.LogWarning("SENT Server message: " + msg.message + "  from client " + netMsg.conn.connectionId);
 		// Server rebroadcast message to all clients
 		Debug.Log(msg.SourceClient);
-		SendMessage(netMsg.msgType, msg.message, netMsg.conn.connectionId);
+		SendData(netMsg.msgType, msg.message, netMsg.conn.connectionId);
 	}
 
 
@@ -84,7 +106,8 @@ public class GNM : NetworkManager
 	{
 		base.OnStartServer();
 		_serverData = gameObject.AddComponent<ServerData>();
-		NetworkServer.RegisterHandler(MyMsgType.Hello, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.Hello, OnServerMessageRecieved);
+		_playerObjects = new Dictionary<int, GameObject>();
 		Debug.LogWarning("OnStartServer");
 	}
 
@@ -98,6 +121,9 @@ public class GNM : NetworkManager
 	{
 		base.OnServerConnect(conn);
 		Debug.LogWarning("OnServerConnect " + conn.connectionId);
+		// Creat player (controlled or as mirror) and add to dict
+		//var player = _clientData.CreatePlayer(playerPrefab, conn.connectionId != _myConnectionId);
+		//_playerObjects.Add(conn.connectionId, player);
 	}
 
 	public override void OnStartClient(NetworkClient client)
@@ -105,7 +131,7 @@ public class GNM : NetworkManager
 		base.OnStartClient(client);
 		_myConnectionId = client.connection.connectionId;
 		Debug.LogWarning("OnStartClient: " + client.connection.connectionId);
-		client.RegisterHandler(MyMsgType.Hello, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.Hello, OnClientMessageRecieved);
 	}
 
 	public override void OnClientConnect(NetworkConnection conn)
@@ -113,7 +139,7 @@ public class GNM : NetworkManager
 		base.OnClientConnect(conn);
 		Debug.LogWarning("OnClientConnect: " + conn.connectionId);
 		_clientData = gameObject.AddComponent<ClientData>();
-		_clientData.CreatePlayer(playerPrefab);
+		var player = _clientData.CreatePlayer(playerPrefab);
 	}
 
 	public override void OnServerDisconnect(NetworkConnection conn)
@@ -130,7 +156,7 @@ public class GNM : NetworkManager
 
 	public override void OnStopClient()
 	{
-		client.UnregisterHandler(MyMsgType.Hello);
+		client.UnregisterHandler(ILMsgType.Hello);
 		Debug.LogWarning("OnStopClient");
 		base.OnStopClient();
 		Destroy(_clientData);
@@ -141,7 +167,7 @@ public class GNM : NetworkManager
 
 
 
-public class MyMsgType
+public class ILMsgType
 {
 	public static short Hello = MsgType.Highest + 1;
 	public static short SetPos = MsgType.Highest + 1;

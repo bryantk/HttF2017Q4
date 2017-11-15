@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayerObject : MonoBehaviour {
 
@@ -11,6 +12,11 @@ public class PlayerObject : MonoBehaviour {
 	public GameObject Fog;
 	public GameObject Camera;
 
+	private bool _playerControlled = true;
+
+	private const int TICKS = 20;
+
+	private int _count;
 
 	// Use this for initialization
 	void Start()
@@ -21,13 +27,29 @@ public class PlayerObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		if (!_playerControlled) return;
+
 		inputs = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 		transform.position = transform.position + inputs * Time.deltaTime * Speed;
+	}
+
+	void FixedUpdate()
+	{
+		if (!_playerControlled) return;
+
+		_count++;
+		if (_count > TICKS)
+		{
+			_count = 0;
+			var data = JsonUtility.ToJson(transform.position);
+			GNM.Instance.SendData(ILMsgType.SetPos, data);
+		}
 	}
 
 
 	public void SetAsClient()
 	{
+		_playerControlled = false;
 		Destroy(Fog);
 		Destroy(Camera);
 	}

@@ -10,13 +10,18 @@ public class ClientData : MonoBehaviour
 
 	public GameObject CreatePlayer(GameObject prefab, bool client = false)
 	{
-		PlayerGameObject = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-		PlayerScript = PlayerGameObject.GetComponent<PlayerObject>();
+		var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+		PlayerScript = go.GetComponent<PlayerObject>();
 		if (client)
 		{
 			PlayerScript.SetAsClient();
+			Destroy(PlayerScript);
 		}
-		return PlayerGameObject;
+		else
+		{
+			PlayerGameObject = go;
+		}
+		return go;
 	}
 
 	void OnDestroy()
