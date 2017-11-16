@@ -51,7 +51,7 @@ public class PlayerObject : MonoBehaviour {
 	{
 		if (!_playerControlled) return;
 
-		_count++;
+		//_count++;
 		if (_count > TICKS)
 		{
 			_count = 0;
@@ -83,6 +83,10 @@ public class PlayerObject : MonoBehaviour {
 			var objectTag = hit.transform.tag;
 			switch (objectTag)
 			{
+				case "Map":
+					MoveToLocation(hit.point);
+					GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(hit.point));
+					break;
 				case "Interactable":
 					Debug.Log("Clicked on interactable");
 					break;
