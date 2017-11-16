@@ -14,7 +14,7 @@ public class PlayerObject : MonoBehaviour {
 
 	private bool _playerControlled = true;
 
-	private const int TICKS = 20;
+	private const int TICKS = 5;
 
 	private int _count;
 
@@ -42,7 +42,7 @@ public class PlayerObject : MonoBehaviour {
 		{
 			_count = 0;
 			var data = JsonUtility.ToJson(transform.position);
-			GNM.Instance.SendData(ILMsgType.SetPos, data);
+			GNM.Instance.SendDataUnreliable(ILMsgType.SetPos, data);
 		}
 	}
 
