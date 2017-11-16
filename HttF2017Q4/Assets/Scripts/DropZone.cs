@@ -75,6 +75,7 @@ public class DropZone : MonoBehaviour
     {
         CurrentTextItem = null;
         SetActive(false);
+		DropManager.UpdateText();
     }
 
     // Update is called once per frame

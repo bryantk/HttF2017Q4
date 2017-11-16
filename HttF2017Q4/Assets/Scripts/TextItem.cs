@@ -18,7 +18,6 @@ public class TextItem : MonoBehaviour
     public DropZone AssociatedZone;
 
 
-    public bool CanPickup;
 
     void Awake()
     {
@@ -38,9 +37,6 @@ public class TextItem : MonoBehaviour
 
     public void PickUp(bool sendMessage = false)
     {
-		if (!CanPickup)
-			return;
-
 		gameObject.SetActive(false);
         if (AssociatedZone)
         {
