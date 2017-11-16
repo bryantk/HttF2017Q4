@@ -152,6 +152,7 @@ public class GNM : NetworkManager
 		else if (netMsg.msgType == ILMsgType.MoveTo)
 		{
 			var id = msg.SourceClient;
+			Debug.LogWarning(id);
 			if (!_playerObjects.ContainsKey(id)) return;
 
 			var pos = JsonUtility.FromJson<Vector3>(msg.message);
