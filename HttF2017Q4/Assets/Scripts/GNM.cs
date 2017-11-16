@@ -31,19 +31,6 @@ public class GNM : NetworkManager
 		_helperMethods = gameObject.AddComponent<GNMHelpers>();
 	}
 
-	void OnGUI()
-	{
-		string mesage = null;
-		if (GUI.Button(new Rect(10, 300, 50, 30), "Send 1"))
-			mesage = "item 1";
-		if (GUI.Button(new Rect(10, 370, 50, 30), "Send 2"))
-			mesage = "item 2";
-
-		if (string.IsNullOrEmpty(mesage)) return;
-
-
-		SendData(ILMsgType.Hello, mesage);
-	}
 
 	/// <summary>
 	/// Send a message to all clients (or server first if you are a client)
@@ -115,7 +102,15 @@ public class GNM : NetworkManager
 
 		Debug.LogWarning("Got message from " + msg.SourceClient + " - " + msg.message);
 		// DO STUFF WITH THE MESSAGE
-		if (netMsg.msgType == ILMsgType.SpawnPlayer)
+		if (netMsg.msgType == ILMsgType.Hello)
+		{
+			_myConnectionId = int.Parse(msg.message);
+			_clientData = gameObject.AddComponent<ClientData>();
+			var player = _clientData.CreatePlayer(playerPrefab);
+			player.name = "Player_" + _myConnectionId + "_me";
+			_playerObjects[_myConnectionId] = player;
+		}
+		else if (netMsg.msgType == ILMsgType.SpawnPlayer)
 		{
 			Debug.Log("Spawn");
 			var data = JsonUtility.FromJson<SpawnData>(msg.message);
@@ -129,7 +124,7 @@ public class GNM : NetworkManager
 			Debug.LogWarning("KILL MESSAGE: " + msg.message);
 			var id = int.Parse(msg.message);
 			Debug.Log("Kill " + id);
-			Destroy(_playerObjects[id]);
+			Destroy(_playerObjects[id].gameObject);
 			_playerObjects.Remove(id);
 		}
 		else if (netMsg.msgType == ILMsgType.SetPos)
@@ -169,7 +164,6 @@ public class GNM : NetworkManager
 	{
 		base.OnStartServer();
 		_serverData = gameObject.AddComponent<ServerData>();
-		NetworkServer.RegisterHandler(ILMsgType.Hello, OnServerMessageRecieved);
 		_playerObjects = new Dictionary<int, PlayerObject>();
 		Debug.LogWarning("OnStartServer");
 		// REGISTER MESSAGES HERE
@@ -194,6 +188,8 @@ public class GNM : NetworkManager
 		// Send CreatePlayer commands to all
 		var poco = new SpawnData {PlayerId = conn.connectionId, Position = Vector3.zero};
 		SendData(ILMsgType.SpawnPlayer, JsonUtility.ToJson(poco), conn.connectionId);
+		// Teach connection what its ID is
+		SendData(ILMsgType.Hello, conn.connectionId.ToString(), -1, conn.connectionId);
 		// Send existing player info to new guy
 		foreach (var kv in _playerObjects)
 		{
@@ -201,9 +197,6 @@ public class GNM : NetworkManager
 			var poco2 = new SpawnData { PlayerId = kv.Key, Position = kv.Value.transform.position };
 			SendData(ILMsgType.SpawnPlayer, JsonUtility.ToJson(poco2), -1, conn.connectionId);
 		}
-		// Creat player (controlled or as mirror) and add to dict
-		//var player = _clientData.CreatePlayer(playerPrefab, conn.connectionId != _myConnectionId);
-		//_playerObjects.Add(conn.connectionId, player);
 	}
 
 	public override void OnStartClient(NetworkClient client)
@@ -222,12 +215,13 @@ public class GNM : NetworkManager
 	public override void OnClientConnect(NetworkConnection conn)
 	{
 		base.OnClientConnect(conn);
-		_myConnectionId = conn.connectionId;
+		
 		Debug.LogWarning("OnClientConnect: " + conn.connectionId);
-		_clientData = gameObject.AddComponent<ClientData>();
-		var player = _clientData.CreatePlayer(playerPrefab);
-		player.name = "Player_" + conn.connectionId + "_me";
-		_playerObjects[conn.connectionId] = player;
+		//_myConnectionId = conn.connectionId;
+		//_clientData = gameObject.AddComponent<ClientData>();
+		//var player = _clientData.CreatePlayer(playerPrefab);
+		//player.name = "Player_" + conn.connectionId + "_me";
+		//_playerObjects[conn.connectionId] = player;
 	}
 
 	public override void OnServerDisconnect(NetworkConnection conn)
@@ -247,7 +241,6 @@ public class GNM : NetworkManager
 
 	public override void OnStopClient()
 	{
-		client.UnregisterHandler(ILMsgType.Hello);
 		Debug.LogWarning("OnStopClient");
 		base.OnStopClient();
 		Destroy(_clientData);
@@ -260,11 +253,12 @@ public class GNM : NetworkManager
 
 public class ILMsgType
 {
-	public static short Hello = MsgType.Highest + 1;
+	public static short Hello = MsgType.Highest + 1; // First contact message
 	public static short SetPos = MsgType.Highest + 2;
 	public static short SpawnPlayer = MsgType.Highest + 3;
 	public static short RemoveId = MsgType.Highest + 4;
 	public static short MoveTo = MsgType.Highest + 5;
+
 };
 
 
