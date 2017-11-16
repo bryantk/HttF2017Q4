@@ -12,6 +12,7 @@ public class TextItem : MonoBehaviour
     private Rigidbody _myRigidbody;
     private Collider _myCollider;
     private Renderer[] rends;
+    public DropZone AssociatedZone;
 
     public bool CanPickup;
 
@@ -33,6 +34,12 @@ public class TextItem : MonoBehaviour
         foreach (Renderer rend in rends)
         {
             rend.enabled = false;
+        }
+
+        if (AssociatedZone)
+        {
+            AssociatedZone.ClearZone();
+            AssociatedZone = null;
         }
     }
 
