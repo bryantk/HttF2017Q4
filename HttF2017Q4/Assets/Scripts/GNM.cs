@@ -143,7 +143,13 @@ public class GNM : NetworkManager
 			var pos = JsonUtility.FromJson<Vector3>(msg.message);
 			_playerObjects[id].MoveToLocation(pos);
 		}
+		else if (netMsg.msgType == ILMsgType.Emote)
+		{
+			var id = msg.SourceClient;
+			if (!_playerObjects.ContainsKey(id)) return;
 
+			_playerObjects[id].Emote(msg.message);
+		}
 	}
 
 
@@ -172,6 +178,7 @@ public class GNM : NetworkManager
 		NetworkServer.RegisterHandler(ILMsgType.SpawnPlayer, OnClientMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.RemoveId, OnClientMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.MoveTo, OnClientMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.Emote, OnClientMessageRecieved);
 	}
 
 	public override void OnStopServer()
@@ -210,6 +217,7 @@ public class GNM : NetworkManager
 		client.RegisterHandler(ILMsgType.SpawnPlayer, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.RemoveId, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.MoveTo, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.Emote, OnClientMessageRecieved);
 	}
 
 	public override void OnClientConnect(NetworkConnection conn)
@@ -258,6 +266,7 @@ public class ILMsgType
 	public static short SpawnPlayer = MsgType.Highest + 3;
 	public static short RemoveId = MsgType.Highest + 4;
 	public static short MoveTo = MsgType.Highest + 5;
+	public static short Emote = MsgType.Highest + 6;
 
 };
 

@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
+	private PlayerObject _playerObject;
+
+	void Awake()
+	{
+		_playerObject = GetComponentInParent<PlayerObject>();
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +29,7 @@ public class HUD : MonoBehaviour
 
 	public void EmoticonButtonOnClick(string buttonName)
 	{
-		Debug.Log("Emoticon button clicked: " + buttonName);
-		//todo
+		_playerObject.Emote(buttonName);
+		GNM.Instance.SendDataUnreliable(ILMsgType.Emote, buttonName);
 	}
 }
