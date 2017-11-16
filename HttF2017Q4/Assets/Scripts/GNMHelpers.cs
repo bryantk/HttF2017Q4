@@ -9,7 +9,6 @@ public class GNMHelpers : MonoBehaviour {
 		var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 		var PlayerScript = go.GetComponent<PlayerObject>();
 		PlayerScript.SetAsClient();
-		Destroy(PlayerScript);
 		return PlayerScript;
 	}
 }

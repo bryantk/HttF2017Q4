@@ -113,7 +113,7 @@ public class GNM : NetworkManager
 
 		if (msg.SourceClient == _myConnectionId) return;
 
-		Debug.Log("Got message from " + msg.SourceClient + " - " + msg.message);
+		Debug.LogWarning("Got message from " + msg.SourceClient + " - " + msg.message);
 		// DO STUFF WITH THE MESSAGE
 		if (netMsg.msgType == ILMsgType.SpawnPlayer)
 		{
