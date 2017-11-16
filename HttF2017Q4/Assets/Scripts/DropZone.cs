@@ -45,6 +45,7 @@ public class DropZone : MonoBehaviour
         {
             col.transform.position = transform.position;
             _currentText = col.GetComponent<TextItem>().Text;
+            col.GetComponent<TextItem>().AssociatedZone = this;
             SetActive(true);
         }
     }
@@ -55,12 +56,17 @@ public class DropZone : MonoBehaviour
             return;
         if (col.GetComponent<TextItem>())
         {
-            _currentText = _defaultText;
-            SetActive(false);
+            ClearZone();
         }
     }
 
-	// Update is called once per frame
+    public void ClearZone()
+    {
+        _currentText = _defaultText;
+        SetActive(false);
+    }
+
+    // Update is called once per frame
 	void Update () {
 	    if (GNM.Instance.IsClient)
 	    {

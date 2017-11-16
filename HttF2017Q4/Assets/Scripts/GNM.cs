@@ -12,7 +12,7 @@ public class GNM : NetworkManager
 	private ServerData _serverData;
 	private ClientData _clientData;
 	private GNMHelpers _helperMethods;
-	private int _myConnectionId;
+	private int _myConnectionId = -2;
 
 	public static GNM Instance;
 
@@ -110,10 +110,16 @@ public class GNM : NetworkManager
 			player.name = "Player_" + _myConnectionId + "_me";
 			_playerObjects[_myConnectionId] = player;
 		}
+		else if (_myConnectionId == -2)
+		{
+			return;
+		}
 		else if (netMsg.msgType == ILMsgType.SpawnPlayer)
 		{
 			Debug.Log("Spawn");
 			var data = JsonUtility.FromJson<SpawnData>(msg.message);
+			if (data.PlayerId == _myConnectionId) return;
+
 			var player = _helperMethods.CreateMirrorPlayer(playerPrefab);
 			player.transform.position = data.Position;
 			player.name = "Player_" + data.PlayerId;
@@ -159,6 +165,7 @@ public class GNM : NetworkManager
 		Debug.LogWarning("SENT Server message: " + msg.message + "  from client " + netMsg.conn.connectionId);
 		// Server rebroadcast message to all clients
 		Debug.Log(msg.SourceClient);
+		// Propagate it to clients
 		SendData(netMsg.msgType, msg.message, netMsg.conn.connectionId);
 	}
 
@@ -225,11 +232,6 @@ public class GNM : NetworkManager
 		base.OnClientConnect(conn);
 		
 		Debug.LogWarning("OnClientConnect: " + conn.connectionId);
-		//_myConnectionId = conn.connectionId;
-		//_clientData = gameObject.AddComponent<ClientData>();
-		//var player = _clientData.CreatePlayer(playerPrefab);
-		//player.name = "Player_" + conn.connectionId + "_me";
-		//_playerObjects[conn.connectionId] = player;
 	}
 
 	public override void OnServerDisconnect(NetworkConnection conn)
@@ -245,14 +247,26 @@ public class GNM : NetworkManager
 	{
 		base.OnClientDisconnect(conn);
 		Debug.LogWarning("OnClientDisconnect: " + conn.connectionId);
+		Cleanup();
 	}
 
 	public override void OnStopClient()
 	{
 		Debug.LogWarning("OnStopClient");
 		base.OnStopClient();
-		Destroy(_clientData);
-		
+		Cleanup();
+	}
+
+	private void Cleanup()
+	{
+		if (_clientData != null)
+			Destroy(_clientData);
+		foreach (var kv in _playerObjects)
+		{
+			Destroy(kv.Value.gameObject);
+		}
+		_playerObjects.Clear();
+		_myConnectionId = -2;
 	}
 
 }

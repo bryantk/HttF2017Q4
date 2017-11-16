@@ -243,6 +243,15 @@ Prefab:
       propertyPath: ID
       value: 54
       objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -561,6 +570,15 @@ Prefab:
       propertyPath: ID
       value: 51
       objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -819,31 +837,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 28.6
+      value: -3.94
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.11
+      value: 1.94
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -49.43
+      value: -16.57
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.5527581
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.47161925
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.52265924
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.4459386
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_RootOrder
@@ -862,6 +880,18 @@ Prefab:
         type: 2}
       propertyPath: ID
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -93.206
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -99.05801
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
@@ -957,7 +987,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.39
+      value: 9.83
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -965,7 +995,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -14.08
+      value: -11.46
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1000,6 +1030,15 @@ Prefab:
         type: 2}
       propertyPath: ID
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
@@ -1549,6 +1588,15 @@ Prefab:
       propertyPath: ID
       value: 54
       objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -1731,6 +1779,15 @@ Prefab:
         type: 2}
       propertyPath: ID
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
@@ -2339,6 +2396,15 @@ Prefab:
       propertyPath: ID
       value: 54
       objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -2886,6 +2952,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -3023,6 +3093,15 @@ Prefab:
         type: 2}
       propertyPath: ID
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
@@ -3360,6 +3439,15 @@ Prefab:
       propertyPath: ID
       value: 52
       objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -3649,6 +3737,15 @@ Prefab:
       propertyPath: ID
       value: 53
       objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
   m_IsPrefabParent: 0
@@ -3885,15 +3982,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 10.27
+      value: 22.69
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.63
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -12.99
+      value: -36.44
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3928,6 +4025,15 @@ Prefab:
         type: 2}
       propertyPath: ID
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: CanPickup
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
