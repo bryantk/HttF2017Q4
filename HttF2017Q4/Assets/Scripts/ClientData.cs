@@ -8,19 +8,17 @@ public class ClientData : MonoBehaviour
 	public GameObject PlayerGameObject;
 	public PlayerObject PlayerScript;
 
-	public PlayerObject CreatePlayer(GameObject prefab, bool client = false)
+	/// <summary>
+	/// When client connects and creates its own controlalble player
+	/// </summary>
+	/// <param name="prefab"></param>
+	/// <returns></returns>
+	public PlayerObject CreatePlayer(GameObject prefab)
 	{
 		var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 		PlayerScript = go.GetComponent<PlayerObject>();
-		if (client)
-		{
-			PlayerScript.SetAsClient();
-			Destroy(PlayerScript);
-		}
-		else
-		{
-			PlayerGameObject = go;
-		}
+
+		PlayerGameObject = go;
 		return PlayerScript;
 	}
 
