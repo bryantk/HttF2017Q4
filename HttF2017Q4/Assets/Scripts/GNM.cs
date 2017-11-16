@@ -199,13 +199,13 @@ public class GNM : NetworkManager
 		_playerObjects = new Dictionary<int, PlayerObject>();
 		Debug.LogWarning("OnStartServer");
 		// REGISTER MESSAGES HERE
-		NetworkServer.RegisterHandler(ILMsgType.Hello, OnClientMessageRecieved);
-		NetworkServer.RegisterHandler(ILMsgType.SetPos, OnClientMessageRecieved);
-		NetworkServer.RegisterHandler(ILMsgType.SpawnPlayer, OnClientMessageRecieved);
-		NetworkServer.RegisterHandler(ILMsgType.RemoveId, OnClientMessageRecieved);
-		NetworkServer.RegisterHandler(ILMsgType.MoveTo, OnClientMessageRecieved);
-		NetworkServer.RegisterHandler(ILMsgType.Emote, OnClientMessageRecieved);
-		NetworkServer.RegisterHandler(ILMsgType.PickedUp, OnClientMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.Hello, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.SetPos, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.SpawnPlayer, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.RemoveId, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.MoveTo, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.Emote, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.PickedUp, OnServerMessageRecieved);
 	}
 
 	public override void OnStopServer()
