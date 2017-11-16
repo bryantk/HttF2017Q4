@@ -15,6 +15,11 @@ public class DropZone : MonoBehaviour
     private bool _isActive;
     private string _currentText;
 
+    public bool HasItem
+    {
+        get { return _isActive; }
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
