@@ -52,6 +52,8 @@ public class TextItem : MonoBehaviour
         {
             rend.enabled = true;
         }
+
+        transform.position = Location;
     }
 
 }

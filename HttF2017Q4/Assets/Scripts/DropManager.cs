@@ -62,10 +62,28 @@ public class DropManager : MonoBehaviour
     public void UpdateText()
     {
         _fullText = "";
+        int currentID = 0;
+        bool correctOrderSoFar = true;
         foreach (DropZone zone in zones)
         {
             _fullText += zone.GetCurrentText();
+            if (zone.CurrentTextItem.ID > currentID)
+            {
+                currentID = zone.CurrentTextItem.ID;
+            }
+            else
+            {
+                correctOrderSoFar = false;
+            }
         }
         _textMeshGround.text = _fullText;
+
+        if (correctOrderSoFar)
+            OrderCorrect();
+    }
+
+    public void OrderCorrect()
+    {
+        Debug.Log("Order Is Correct!");
     }
 }
