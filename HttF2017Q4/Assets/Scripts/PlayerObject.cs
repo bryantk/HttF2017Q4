@@ -88,7 +88,7 @@ public class PlayerObject : MonoBehaviour {
 						Debug.LogWarning("Interactable was not text item");
 						return;
 					}
-					textItem.PickUp();
+					textItem.PickUp(true);
 					break;
 			}
 		}
