@@ -41,11 +41,14 @@ public class DropManager : MonoBehaviour
 
         for (int i = 0; i < numberOfZones; i++)
         {
-            GameObject newZone = Instantiate(DZTemplate.gameObject);
+            GameObject newZoneGO = Instantiate(DZTemplate.gameObject);
+            DropZone newZone = newZoneGO.GetComponent<DropZone>();
+
             zones.Add(newZone.GetComponent<DropZone>());
 
-            newZone.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / ((float)numberOfZones-1));
-            newZone.transform.parent = transform;
+            newZoneGO.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / ((float)numberOfZones-1));
+            newZoneGO.transform.parent = transform;
+            newZone.DropManager = this;
         }
 
     }
@@ -55,13 +58,8 @@ public class DropManager : MonoBehaviour
 	{
 	    Generate(_initialNumberOfZones);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		CreateText();
-	}
 
-    private void CreateText()
+    public void UpdateText()
     {
         _fullText = "";
         foreach (DropZone zone in zones)
