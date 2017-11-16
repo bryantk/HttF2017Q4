@@ -204,6 +204,7 @@ public class GNM : NetworkManager
 		NetworkServer.RegisterHandler(ILMsgType.RemoveId, OnClientMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.MoveTo, OnClientMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.Emote, OnClientMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.PickedUp, OnClientMessageRecieved);
 	}
 
 	public override void OnStopServer()
@@ -243,6 +244,7 @@ public class GNM : NetworkManager
 		client.RegisterHandler(ILMsgType.RemoveId, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.MoveTo, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.Emote, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.PickedUp, OnClientMessageRecieved);
 	}
 
 	public override void OnClientConnect(NetworkConnection conn)
