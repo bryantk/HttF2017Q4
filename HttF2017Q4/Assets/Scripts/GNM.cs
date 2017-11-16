@@ -156,7 +156,7 @@ public class GNM : NetworkManager
 			if (!_playerObjects.ContainsKey(id)) return;
 
 			var pos = JsonUtility.FromJson<Vector3>(msg.message);
-			_playerObjects[id].MoveToLocation(pos);
+			_playerObjects[id].MoveTo(pos);
 		}
 		else if (netMsg.msgType == ILMsgType.Emote)
 		{
