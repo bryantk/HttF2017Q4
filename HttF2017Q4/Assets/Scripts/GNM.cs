@@ -121,7 +121,7 @@ public class GNM : NetworkManager
 			var data = JsonUtility.FromJson<SpawnData>(msg.message);
 			var player = _helperMethods.CreateMirrorPlayer(playerPrefab);
 			player.transform.position = data.Position;
-			player.name = "Player_" + msg.SourceClient;
+			player.name = "Player_" + data.PlayerId;
 			_playerObjects.Add(data.PlayerId, player);
 		}
 		else if (netMsg.msgType == ILMsgType.RemoveId)
@@ -216,6 +216,7 @@ public class GNM : NetworkManager
 		Debug.LogWarning("OnClientConnect: " + conn.connectionId);
 		_clientData = gameObject.AddComponent<ClientData>();
 		var player = _clientData.CreatePlayer(playerPrefab);
+		player.name = "Player_" + conn.connectionId + "_me";
 		_playerObjects[conn.connectionId] = player;
 	}
 
