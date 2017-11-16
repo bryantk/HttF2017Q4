@@ -19,14 +19,12 @@ public class PlayerObject : MonoBehaviour {
 	public GameObject PlayerCamera;
 	public EventSystem EventSystem;
 	private bool _playerControlled = true;
-	private List<TextItem> _textItems;
 	private const int TICKS = 5;
 
 	private int _count;
 
     void Awake()
     {
-		_textItems = new List<TextItem> {null, null, null};
         if (_navAgent == null)
             _navAgent = GetComponent<NavMeshAgent>();
     }
@@ -84,24 +82,17 @@ public class PlayerObject : MonoBehaviour {
 						SendMove(moveTowards);
 						return;
 					}
-
 					var textItem = hit.transform.GetComponent<TextItem>();
-					if (textItem == null || _textItems.Contains(textItem))
+					HUD.AddInventoryItem(textItem);
+					break;
+				case "DropZone":
+					var selectedText = HUD.SelectedItem;
+					if (selectedText == null)
 					{
 						break;
 					}
-
-					var inventoryIndex = _textItems.IndexOf(null);
-					if (inventoryIndex < 0)
-					{
-						Debug.LogWarning("Too much inventory");
-						//no available slots, send message
-						break;
-					}
-
-					textItem.PickUp(true);
-					HUD.AddInventoryItem(inventoryIndex, textItem.Text);
-					_textItems[inventoryIndex] = textItem;
+					selectedText.Drop(hit.point, true);
+					HUD.RemoveSelectedInventoryItem();
 					break;
 			}
 		}
