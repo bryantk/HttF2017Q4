@@ -39,7 +39,7 @@ public class PlayerObject : MonoBehaviour {
 	void Update()
 	{
 		if (!_playerControlled) return;
-		if (Input.GetMouseButtonDown(0) && !EventSystem.IsPointerOverGameObject())
+		if (Input.GetMouseButton(0) && !EventSystem.IsPointerOverGameObject())
 		{
 			HandleClick();
 		}

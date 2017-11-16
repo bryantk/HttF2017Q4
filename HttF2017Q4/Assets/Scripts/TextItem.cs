@@ -23,29 +23,42 @@ public class TextItem : MonoBehaviour
         rends = GetComponentsInChildren<Renderer>();
     }
 
-    public void PickUp()
-    {
-        if (!CanPickup)
-            return;
-        _myRigidbody.isKinematic = true;
-        _myRigidbody.useGravity = false;
-        _myCollider.enabled = false;
+	void Start()
+	{
+		GNM.Instance.AddToTracked(ID, gameObject);
+	}
 
-        foreach (Renderer rend in rends)
-        {
-            rend.enabled = false;
-        }
+    public void PickUp(bool sendMessage = false)
+    {
+		if (!CanPickup)
+			return;
+		_myRigidbody.isKinematic = true;
+		_myRigidbody.useGravity = false;
+		_myCollider.enabled = false;
+
+		foreach (Renderer rend in rends)
+		{
+			rend.enabled = false;
+		}
 
         if (AssociatedZone)
         {
             AssociatedZone.ClearZone();
             AssociatedZone = null;
         }
+
+	    if (sendMessage)
+	    {
+		    GNM.Instance.SendData(ILMsgType.PickedUp, ID.ToString());
+	    }
     }
 
-    public void Drop(Vector3 Location)
+    public void Drop(Vector3 location, bool sendMessage=false)
     {
-        _myRigidbody.isKinematic = false;
+		location.y += 2;
+		transform.position = location;
+
+		_myRigidbody.isKinematic = false;
         _myRigidbody.useGravity = true;
         _myCollider.enabled = true;
         foreach (Renderer rend in rends)
@@ -53,7 +66,10 @@ public class TextItem : MonoBehaviour
             rend.enabled = true;
         }
 
-        transform.position = Location;
-    }
+		if (sendMessage)
+		{
+			GNM.Instance.SendData(ILMsgType.SetPos, ID.ToString());
+		}
+	}
 
 }
