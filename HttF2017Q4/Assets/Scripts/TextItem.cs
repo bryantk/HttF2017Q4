@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TextItem : MonoBehaviour
 {
     [TextArea]
     public string Text;
+
+	public TextMeshPro TMP;
 
     public int ID = 50;
 
@@ -14,6 +17,7 @@ public class TextItem : MonoBehaviour
     private Renderer[] rends;
     public DropZone AssociatedZone;
 
+
     public bool CanPickup;
 
     void Awake()
@@ -21,6 +25,10 @@ public class TextItem : MonoBehaviour
         _myRigidbody = GetComponent<Rigidbody>();
         _myCollider = GetComponent<Collider>();
         rends = GetComponentsInChildren<Renderer>();
+
+	    TMP.text = Text;
+
+		transform.rotation = Quaternion.Euler(Vector3.up * Random.Range(-10f, 10f));
     }
 
 	void Start()
@@ -32,15 +40,8 @@ public class TextItem : MonoBehaviour
     {
 		if (!CanPickup)
 			return;
-		_myRigidbody.isKinematic = true;
-		_myRigidbody.useGravity = false;
-		_myCollider.enabled = false;
 
-		foreach (Renderer rend in rends)
-		{
-			rend.enabled = false;
-		}
-
+		gameObject.SetActive(false);
         if (AssociatedZone)
         {
             AssociatedZone.ClearZone();
@@ -58,13 +59,7 @@ public class TextItem : MonoBehaviour
 		location.y += 2;
 		transform.position = location;
 
-		_myRigidbody.isKinematic = false;
-        _myRigidbody.useGravity = true;
-        _myCollider.enabled = true;
-        foreach (Renderer rend in rends)
-        {
-            rend.enabled = true;
-        }
+		gameObject.SetActive(true);
 
 		if (sendMessage)
 		{
