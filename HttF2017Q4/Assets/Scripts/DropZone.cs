@@ -24,6 +24,7 @@ public class DropZone : MonoBehaviour
 
     void SetActive(bool active)
     {
+        _isActive = active;
         foreach (Renderer rend in GetComponentsInChildren<Renderer>())
         {
             rend.material.color = active ? _activeColor : _inactiveColor;
@@ -33,8 +34,11 @@ public class DropZone : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
+        if (_isActive)
+            return;
         if (col.GetComponent<TextItem>())
         {
+            col.transform.position = transform.position;
             _currentText = col.GetComponent<TextItem>().Text;
             SetActive(true);
         }
@@ -42,8 +46,13 @@ public class DropZone : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        _currentText = _defaultText;
-        SetActive(false);
+        if (!_isActive)
+            return;
+        if (col.GetComponent<TextItem>())
+        {
+            _currentText = _defaultText;
+            SetActive(false);
+        }
     }
 
 	// Update is called once per frame
