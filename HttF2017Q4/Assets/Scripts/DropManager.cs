@@ -41,11 +41,14 @@ public class DropManager : MonoBehaviour
 
         for (int i = 0; i < numberOfZones; i++)
         {
-            GameObject newZone = Instantiate(DZTemplate.gameObject);
+            GameObject newZoneGO = Instantiate(DZTemplate.gameObject);
+            DropZone newZone = newZoneGO.GetComponent<DropZone>();
+
             zones.Add(newZone.GetComponent<DropZone>());
 
-            newZone.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / ((float)numberOfZones-1));
-            newZone.transform.parent = transform;
+            newZoneGO.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / ((float)numberOfZones-1));
+            newZoneGO.transform.parent = transform;
+            newZone.DropManager = this;
         }
 
     }
@@ -55,19 +58,32 @@ public class DropManager : MonoBehaviour
 	{
 	    Generate(_initialNumberOfZones);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		CreateText();
-	}
 
-    private void CreateText()
+    public void UpdateText()
     {
         _fullText = "";
+        int currentID = 0;
+        bool correctOrderSoFar = true;
         foreach (DropZone zone in zones)
         {
             _fullText += zone.GetCurrentText();
+            if (zone.CurrentTextItem.ID > currentID)
+            {
+                currentID = zone.CurrentTextItem.ID;
+            }
+            else
+            {
+                correctOrderSoFar = false;
+            }
         }
         _textMeshGround.text = _fullText;
+
+        if (correctOrderSoFar)
+            OrderCorrect();
+    }
+
+    public void OrderCorrect()
+    {
+        Debug.Log("Order Is Correct!");
     }
 }

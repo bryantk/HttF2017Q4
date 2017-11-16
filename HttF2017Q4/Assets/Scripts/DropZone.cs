@@ -12,8 +12,20 @@ public class DropZone : MonoBehaviour
     [SerializeField]
     private LayerMask _itemLayer;
 
+    private DropManager _myDropManager;
+
+    public DropManager DropManager
+    {
+        get { return _myDropManager; }
+        set
+        {
+            if (_myDropManager != null) return;
+            _myDropManager = value;
+        }
+    }
+
     private bool _isActive;
-    private string _currentText;
+    public TextItem CurrentTextItem;
 
     public bool HasItem
     {
@@ -23,7 +35,6 @@ public class DropZone : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    _currentText = _defaultText;
 	    SetActive((false));
 	}
 
@@ -33,8 +44,7 @@ public class DropZone : MonoBehaviour
         foreach (Renderer rend in GetComponentsInChildren<Renderer>())
         {
             rend.material.color = active ? _activeColor : _inactiveColor;
-        }
-       
+        } 
     }
 
     void OnTriggerEnter(Collider col)
@@ -44,8 +54,9 @@ public class DropZone : MonoBehaviour
         if (col.GetComponent<TextItem>())
         {
             col.transform.position = transform.position;
-            _currentText = col.GetComponent<TextItem>().Text;
+            CurrentTextItem = col.GetComponent<TextItem>();
             col.GetComponent<TextItem>().AssociatedZone = this;
+            DropManager.UpdateText();
             SetActive(true);
         }
     }
@@ -62,7 +73,7 @@ public class DropZone : MonoBehaviour
 
     public void ClearZone()
     {
-        _currentText = _defaultText;
+        CurrentTextItem = null;
         SetActive(false);
     }
 
@@ -76,7 +87,9 @@ public class DropZone : MonoBehaviour
 
     public string GetCurrentText()
     {
-        return _currentText;
+        if (CurrentTextItem == null)
+            return _defaultText;
+        return CurrentTextItem.Text;
     }
 
     public float GetSize()
