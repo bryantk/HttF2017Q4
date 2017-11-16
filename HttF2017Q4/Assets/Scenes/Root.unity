@@ -107,7 +107,7 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 5d0b6d570594bab45b635c081ec4dbf7, type: 2}
 --- !u!1 &93188617
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1586,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1123370908
 Transform:
@@ -2630,7 +2630,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7571b7270d615d438cc37dcda530f71, type: 2}
-  m_RootGameObject: {fileID: 337435386}
   m_IsPrefabParent: 0
 --- !u!1 &1661274680
 GameObject:
