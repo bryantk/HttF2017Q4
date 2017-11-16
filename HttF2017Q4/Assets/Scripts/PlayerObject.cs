@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -113,8 +114,20 @@ public class PlayerObject : MonoBehaviour {
 			GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(location));
 	}
 
-	public void Emote(string msgMessage)
+	public void Emote(string msgMessage, bool sendMessage = false)
 	{
-		Debug.Log("EMOTING");
+		Debug.Log("EMOTING: " + msgMessage);
+
+		var name = "emotes_angry";
+		if (msgMessage == "Happy")
+			name = "emotes_happy";
+		var emotePrefab = (GameObject)Resources.Load(name);
+		var emote = Instantiate(emotePrefab, transform);
+		emote.transform.position = Player.transform.position + Vector3.up;
+
+		emote.transform.DOMoveY(2, 2).OnComplete(()=>Destroy(emote));
+
+		if (sendMessage)
+			GNM.Instance.SendDataUnreliable(ILMsgType.Emote, msgMessage);
 	}
 }
