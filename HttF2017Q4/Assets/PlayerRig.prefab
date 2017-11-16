@@ -589,9 +589,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 3
+  _navAgent: {fileID: 0}
   Player: {fileID: 1600748300516110}
   Fog: {fileID: 1080256887850164}
-  Camera: {fileID: 1886760140149020}
+  PlayerCamera: {fileID: 1886760140149020}
 --- !u!124 &124529850459297074
 Behaviour:
   m_ObjectHideFlags: 1

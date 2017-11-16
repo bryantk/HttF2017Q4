@@ -1,22 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
 
 public class PlayerObject : MonoBehaviour {
 
 	public float Speed = 3;
+
+    [SerializeField] private NavMeshAgent _navAgent;
+
 	private Vector3 inputs;
 
 	public GameObject Player;
 	public GameObject Fog;
-	public GameObject Camera;
+	public GameObject PlayerCamera;
 
 	private bool _playerControlled = true;
 
 	private const int TICKS = 5;
 
 	private int _count;
+
+    void Awake()
+    {
+        if (_navAgent == null)
+            _navAgent = GetComponent<NavMeshAgent>();
+    }
 
 	// Use this for initialization
 	void Start()
@@ -28,6 +38,10 @@ public class PlayerObject : MonoBehaviour {
 	void Update()
 	{
 		if (!_playerControlled) return;
+		if (Input.GetMouseButtonDown(0))
+		{
+			HandleClick();
+		}
 
 		inputs = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 		transform.position = transform.position + inputs * Time.deltaTime * Speed;
@@ -51,7 +65,29 @@ public class PlayerObject : MonoBehaviour {
 	{
 		_playerControlled = false;
 		Destroy(Fog);
-		Destroy(Camera);
+		Destroy(PlayerCamera);
+	}
+
+    public void MoveToLocation(Vector3 location)
+    {
+        _navAgent.SetDestination(location);
+    }
+
+	private void HandleClick()
+	{
+		var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit))
+		{
+			var objectTag = hit.transform.tag;
+			switch (objectTag)
+			{
+				case "Interactable":
+					Debug.Log("Clicked on interactable");
+					break;
+			}
+		}
 	}
 
 
