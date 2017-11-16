@@ -82,4 +82,8 @@ public class PlayerObject : MonoBehaviour {
 	}
 
 
+	public void Emote(string msgMessage)
+	{
+		Debug.Log("EMOTING");
+	}
 }
