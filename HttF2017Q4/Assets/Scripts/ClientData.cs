@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ClientData : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class ClientData : MonoBehaviour
 	{
 		var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 		PlayerScript = go.GetComponent<PlayerObject>();
+		PlayerScript.EventSystem = FindObjectOfType<EventSystem>();
 
 		PlayerGameObject = go;
 		return PlayerScript;
