@@ -121,6 +121,7 @@ public class GNM : NetworkManager
 			var data = JsonUtility.FromJson<SpawnData>(msg.message);
 			var player = _helperMethods.CreateMirrorPlayer(playerPrefab);
 			player.transform.position = data.Position;
+			player.name = "Player_" + msg.SourceClient;
 			_playerObjects.Add(data.PlayerId, player);
 		}
 		else if (netMsg.msgType == ILMsgType.RemoveId)
@@ -163,6 +164,11 @@ public class GNM : NetworkManager
 		NetworkServer.RegisterHandler(ILMsgType.Hello, OnServerMessageRecieved);
 		_playerObjects = new Dictionary<int, GameObject>();
 		Debug.LogWarning("OnStartServer");
+		// REGISTER MESSAGES HERE
+		NetworkServer.RegisterHandler(ILMsgType.Hello, OnClientMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.SetPos, OnClientMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.SpawnPlayer, OnClientMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.RemoveId, OnClientMessageRecieved);
 	}
 
 	public override void OnStopServer()
