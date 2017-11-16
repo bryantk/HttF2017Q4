@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
 
 public class PlayerObject : MonoBehaviour {
 
 	public float Speed = 3;
+
+    [SerializeField] private NavMeshAgent _navAgent;
+
 	private Vector3 inputs;
 
 	public GameObject Player;
@@ -17,6 +21,12 @@ public class PlayerObject : MonoBehaviour {
 	private const int TICKS = 20;
 
 	private int _count;
+
+    void Awake()
+    {
+        if (_navAgent == null)
+            _navAgent = GetComponent<NavMeshAgent>();
+    }
 
 	// Use this for initialization
 	void Start()
@@ -54,5 +64,9 @@ public class PlayerObject : MonoBehaviour {
 		Destroy(Camera);
 	}
 
+    public void MoveToLocation(Vector3 location)
+    {
+        _navAgent.SetDestination(location);
+    }
 
 }
