@@ -19,7 +19,7 @@ public class GNM : NetworkManager
 	public bool IsServer { get { return _serverData != null; } }
 	public bool IsClient { get { return _clientData != null; } }
 
-	private Dictionary<int, GameObject> _playerObjects = new Dictionary<int, GameObject>();
+	private Dictionary<int, PlayerObject> _playerObjects = new Dictionary<int, PlayerObject>();
 
 
 	void Awake()
@@ -140,6 +140,14 @@ public class GNM : NetworkManager
 			var pos = JsonUtility.FromJson<Vector3>(msg.message);
 			_playerObjects[id].transform.DOMove(pos, 0.1f);
 		}
+		else if (netMsg.msgType == ILMsgType.MoveTo)
+		{
+			var id = msg.SourceClient;
+			if (!_playerObjects.ContainsKey(id)) return;
+
+			var pos = JsonUtility.FromJson<Vector3>(msg.message);
+			_playerObjects[id].MoveToLocation(pos);
+		}
 
 	}
 
@@ -162,7 +170,7 @@ public class GNM : NetworkManager
 		base.OnStartServer();
 		_serverData = gameObject.AddComponent<ServerData>();
 		NetworkServer.RegisterHandler(ILMsgType.Hello, OnServerMessageRecieved);
-		_playerObjects = new Dictionary<int, GameObject>();
+		_playerObjects = new Dictionary<int, PlayerObject>();
 		Debug.LogWarning("OnStartServer");
 		// REGISTER MESSAGES HERE
 		NetworkServer.RegisterHandler(ILMsgType.Hello, OnClientMessageRecieved);
@@ -254,6 +262,7 @@ public class ILMsgType
 	public static short SetPos = MsgType.Highest + 2;
 	public static short SpawnPlayer = MsgType.Highest + 3;
 	public static short RemoveId = MsgType.Highest + 4;
+	public static short MoveTo = MsgType.Highest + 5;
 };
 
 

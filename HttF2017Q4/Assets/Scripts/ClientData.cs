@@ -8,7 +8,7 @@ public class ClientData : MonoBehaviour
 	public GameObject PlayerGameObject;
 	public PlayerObject PlayerScript;
 
-	public GameObject CreatePlayer(GameObject prefab, bool client = false)
+	public PlayerObject CreatePlayer(GameObject prefab, bool client = false)
 	{
 		var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 		PlayerScript = go.GetComponent<PlayerObject>();
@@ -21,7 +21,7 @@ public class ClientData : MonoBehaviour
 		{
 			PlayerGameObject = go;
 		}
-		return go;
+		return PlayerScript;
 	}
 
 	void OnDestroy()
