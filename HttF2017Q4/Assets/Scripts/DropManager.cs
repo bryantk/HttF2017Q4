@@ -67,7 +67,7 @@ public class DropManager : MonoBehaviour
         foreach (DropZone zone in zones)
         {
             _fullText += zone.GetCurrentText();
-            if (zone.CurrentTextItem.ID > currentID)
+            if (zone.CurrentTextItem != null && zone.CurrentTextItem.ID > currentID)
             {
                 currentID = zone.CurrentTextItem.ID;
             }
