@@ -14,7 +14,7 @@ public class PlayerObject : MonoBehaviour {
 
 	public GameObject Player;
 	public GameObject Fog;
-	public GameObject Camera;
+	public GameObject PlayerCamera;
 
 	private bool _playerControlled = true;
 
@@ -38,6 +38,10 @@ public class PlayerObject : MonoBehaviour {
 	void Update()
 	{
 		if (!_playerControlled) return;
+		if (Input.GetMouseButtonDown(0))
+		{
+			HandleClick();
+		}
 
 		inputs = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 		transform.position = transform.position + inputs * Time.deltaTime * Speed;
@@ -61,12 +65,30 @@ public class PlayerObject : MonoBehaviour {
 	{
 		_playerControlled = false;
 		Destroy(Fog);
-		Destroy(Camera);
+		Destroy(PlayerCamera);
 	}
 
     public void MoveToLocation(Vector3 location)
     {
         _navAgent.SetDestination(location);
     }
+
+	private void HandleClick()
+	{
+		var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+
+		if (Physics.Raycast(ray, out hit))
+		{
+			var objectTag = hit.transform.tag;
+			switch (objectTag)
+			{
+				case "Interactable":
+					Debug.Log("Clicked on interactable");
+					break;
+			}
+		}
+	}
+
 
 }
