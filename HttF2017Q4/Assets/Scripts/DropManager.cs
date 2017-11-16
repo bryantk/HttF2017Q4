@@ -43,7 +43,7 @@ public class DropManager : MonoBehaviour
             GameObject newZone = Instantiate(DZTemplate.gameObject);
             zones.Add(newZone.GetComponent<DropZone>());
 
-            newZone.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / (float)numberOfZones);
+            newZone.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / ((float)numberOfZones-1));
         }
 
     }
