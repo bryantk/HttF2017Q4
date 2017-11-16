@@ -7,6 +7,8 @@ public class TextItem : MonoBehaviour
     [TextArea]
     public string Text;
 
+    public int ID = 50;
+
     private Rigidbody _myRigidbody;
     private Collider _myCollider;
     private Renderer[] rends;
