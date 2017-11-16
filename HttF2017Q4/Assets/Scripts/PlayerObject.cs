@@ -71,16 +71,34 @@ public class PlayerObject : MonoBehaviour {
 			switch (objectTag)
 			{
 				case "Map":
-					MoveToLocation(hit.point);
-					GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(hit.point));
+					SendMove(hit.point);
 					break;
 				case "Interactable":
-					Debug.Log("Clicked on interactable");
+					var distance = Vector3.Distance(hit.point, Player.transform.position);
+					var maxDistance = 2;
+					if (distance > maxDistance)
+					{
+						var moveTowards = Vector3.MoveTowards(Player.transform.position, hit.point, distance - maxDistance + .5f);
+						SendMove(moveTowards);
+						return;
+					}
+					var textItem = hit.transform.GetComponent<TextItem>();
+					if (textItem == null)
+					{
+						Debug.LogWarning("Interactable was not text item");
+						return;
+					}
+					textItem.PickUp();
 					break;
 			}
 		}
 	}
 
+	private void SendMove(Vector3 location)
+	{
+		MoveToLocation(location);
+		GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(location));
+	}
 
 	public void Emote(string msgMessage)
 	{
