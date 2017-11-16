@@ -75,6 +75,18 @@ public class HUD : MonoBehaviour
 		inventorySlot.GetComponentInChildren<TextMeshProUGUI>().text = textItem.Text;
 	}
 
+	public void DeselectItem()
+	{
+		for (var index = 0; index < _textItems.Count; index++)
+		{
+			var textItem = _textItems[index];
+			if (textItem == null) continue;
+			var inventorySlot = _inventoryParent.GetChild(index);
+			inventorySlot.GetComponent<Image>().color = Color.cyan;
+			SelectedItem = null;
+		}
+	}
+
 	public void RemoveSelectedInventoryItem()
 	{
 		if(SelectedItem == null) return;

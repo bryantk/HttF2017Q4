@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DropZone : MonoBehaviour
@@ -55,8 +56,9 @@ public class DropZone : MonoBehaviour
         {
             col.transform.position = transform.position;
             CurrentTextItem = col.GetComponent<TextItem>();
+	        col.GetComponentInChildren<TextMeshPro>(true).gameObject.SetActive(false);
             col.GetComponent<TextItem>().AssociatedZone = this;
-            DropManager.UpdateText();
+			DropManager.UpdateText();
             SetActive(true);
         }
     }
@@ -78,7 +80,7 @@ public class DropZone : MonoBehaviour
 		DropManager.UpdateText();
     }
 
-    // Update is called once per frame
+	// Update is called once per frame
 	void Update () {
 	    if (GNM.Instance.IsClient)
 	    {
