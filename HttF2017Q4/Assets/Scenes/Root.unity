@@ -769,11 +769,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 465905465}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &495924452 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf,
-    type: 2}
-  m_PrefabInternal: {fileID: 896005990}
 --- !u!1 &523841730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,48 +1434,6 @@ Transform:
   m_Father: {fileID: 1249251405}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &896005990
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1249251405}
-    m_Modifications:
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 7.5555563
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -9.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 18.954437
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &939960460
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,7 +1930,6 @@ Transform:
   - {fileID: 1234082274}
   - {fileID: 885942305}
   - {fileID: 1786469635}
-  - {fileID: 495924452}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2391,6 +2343,68 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1352389065}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1400130302
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -6.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 9.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.48926482
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.5156157
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.48416436
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.51024044
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426543709690956, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_Name
+      value: The Good Book
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -86.996
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
+        type: 2}
+      propertyPath: Text
+      value: "Once upon a time there was a child who was willful, and would not do\r\nwhat
+        her mother wished.  For this reason God had no pleasure in her,\r\nand let
+        her become ill, and no doctor could do her any good, and in a\r\nshort time
+        she lay on her death-bed. "
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1422300766
 GameObject:
   m_ObjectHideFlags: 0

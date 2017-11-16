@@ -35,6 +35,7 @@ public class DropManager : MonoBehaviour
         unitSize *= 1f -_padding;
 
         DropZone DZTemplate = Instantiate(_dropZonePrefab).GetComponent<DropZone>();
+        DZTemplate.transform.position = new Vector3(-100f, -100f, -100f);
 
         DZTemplate.SetSize(unitSize);
 
@@ -44,6 +45,7 @@ public class DropManager : MonoBehaviour
             zones.Add(newZone.GetComponent<DropZone>());
 
             newZone.transform.position = Vector3.Lerp(_minPoint.position, _maxPoint.position, (float)i / ((float)numberOfZones-1));
+            newZone.transform.parent = transform;
         }
 
     }
