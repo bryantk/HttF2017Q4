@@ -95,6 +95,19 @@ public class PlayerObject : MonoBehaviour {
 					break;
 				case "DropZone":
 					var selectedText = HUD.SelectedItem;
+					var dropZone = hit.transform.GetComponent<DropZone>();
+
+					if (dropZone.HasItem)
+					{
+						if (selectedText == null)
+						{
+							//pick up book in zone
+							HUD.AddInventoryItem(dropZone.CurrentTextItem);
+							break;
+						}
+						//todo swap books
+						break;
+					}
 					if (selectedText == null)
 					{
 						break;
