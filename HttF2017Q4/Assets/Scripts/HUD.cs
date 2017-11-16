@@ -47,8 +47,7 @@ public class HUD : MonoBehaviour
 
 	public void EmoticonButtonOnClick(string buttonName)
 	{
-		_playerObject.Emote(buttonName);
-		GNM.Instance.SendDataUnreliable(ILMsgType.Emote, buttonName);
+		_playerObject.Emote(buttonName, true);
 	}
 
 	public void AddInventoryItem(TextItem textItem)

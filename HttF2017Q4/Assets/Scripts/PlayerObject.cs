@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -12,14 +13,12 @@ public class PlayerObject : MonoBehaviour {
 
     [SerializeField] private NavMeshAgent _navAgent;
 
-	private Vector3 inputs;
 	public HUD HUD;
 	public GameObject Player;
 	public GameObject Fog;
 	public GameObject PlayerCamera;
 	public EventSystem EventSystem;
 	private bool _playerControlled = true;
-	private const int TICKS = 5;
 
 	private int _count;
 
@@ -39,13 +38,16 @@ public class PlayerObject : MonoBehaviour {
 	void Update()
 	{
 		if (!_playerControlled) return;
+
 		if (Input.GetMouseButton(0) && !EventSystem.IsPointerOverGameObject())
 		{
 			HandleClick();
 		}
 
-		inputs = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-		transform.position = transform.position + inputs * Time.deltaTime * Speed;
+		var location = Fog.transform.position;
+		location.y = 0;
+		Fog.transform.position = location;
+
 	}
 
 	public void SetAsClient()
@@ -58,6 +60,12 @@ public class PlayerObject : MonoBehaviour {
     public void MoveToLocation(Vector3 location)
     {
         _navAgent.SetDestination(location);
+		Player.transform.LookAt(_navAgent.steeringTarget);
+	    var rot = Player.transform.rotation.eulerAngles;
+	    rot.x = 0;
+	    rot.z = 0;
+		Player.transform.rotation = Quaternion.Euler(rot);
+
     }
 
 	private void HandleClick()
@@ -71,7 +79,7 @@ public class PlayerObject : MonoBehaviour {
 			switch (objectTag)
 			{
 				case "Map":
-					SendMove(hit.point);
+					MoveTo(hit.point, true);
 					break;
 				case "Interactable":
 					var distance = Vector3.Distance(hit.point, Player.transform.position);
@@ -79,7 +87,7 @@ public class PlayerObject : MonoBehaviour {
 					if (distance > maxDistance)
 					{
 						var moveTowards = Vector3.MoveTowards(Player.transform.position, hit.point, distance - maxDistance + .5f);
-						SendMove(moveTowards);
+						MoveTo(moveTowards, true);
 						return;
 					}
 					var textItem = hit.transform.GetComponent<TextItem>();
@@ -111,14 +119,28 @@ public class PlayerObject : MonoBehaviour {
 		}
 	}
 
-	private void SendMove(Vector3 location)
+	public void MoveTo(Vector3 location, bool sendMessage = false)
 	{
 		MoveToLocation(location);
-		GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(location));
+
+		if (sendMessage)
+			GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(location));
 	}
 
-	public void Emote(string msgMessage)
+	public void Emote(string msgMessage, bool sendMessage = false)
 	{
-		Debug.Log("EMOTING");
+		Debug.Log("EMOTING: " + msgMessage);
+
+		var name = "emotes_angry";
+		if (msgMessage == "Happy")
+			name = "emotes_happy";
+		var emotePrefab = (GameObject)Resources.Load(name);
+		var emote = Instantiate(emotePrefab, transform);
+		emote.transform.position = Player.transform.position + Vector3.up;
+
+		emote.transform.DOMoveY(2, 2).OnComplete(()=>Destroy(emote));
+
+		if (sendMessage)
+			GNM.Instance.SendDataUnreliable(ILMsgType.Emote, msgMessage);
 	}
 }
