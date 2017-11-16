@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -12,19 +13,20 @@ public class PlayerObject : MonoBehaviour {
     [SerializeField] private NavMeshAgent _navAgent;
 
 	private Vector3 inputs;
-
+	public HUD HUD;
 	public GameObject Player;
 	public GameObject Fog;
 	public GameObject PlayerCamera;
 	public EventSystem EventSystem;
 	private bool _playerControlled = true;
-
+	private List<TextItem> _textItems;
 	private const int TICKS = 5;
 
 	private int _count;
 
     void Awake()
     {
+		_textItems = new List<TextItem> {null, null, null};
         if (_navAgent == null)
             _navAgent = GetComponent<NavMeshAgent>();
     }
@@ -82,13 +84,24 @@ public class PlayerObject : MonoBehaviour {
 						SendMove(moveTowards);
 						return;
 					}
+
 					var textItem = hit.transform.GetComponent<TextItem>();
-					if (textItem == null)
+					if (textItem == null || _textItems.Contains(textItem))
 					{
-						Debug.LogWarning("Interactable was not text item");
-						return;
+						break;
 					}
+
+					var inventoryIndex = _textItems.IndexOf(null);
+					if (inventoryIndex < 0)
+					{
+						Debug.LogWarning("Too much inventory");
+						//no available slots, send message
+						break;
+					}
+
 					textItem.PickUp(true);
+					HUD.AddInventoryItem(inventoryIndex, textItem.Text);
+					_textItems[inventoryIndex] = textItem;
 					break;
 			}
 		}

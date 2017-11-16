@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114972863271873256}
   m_Layer: 0
   m_Name: DropZone
-  m_TagString: Untagged
+  m_TagString: DropZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -282,3 +282,4 @@ MonoBehaviour:
   _itemLayer:
     serializedVersion: 2
     m_Bits: 0
+  CurrentTextItem: {fileID: 0}
