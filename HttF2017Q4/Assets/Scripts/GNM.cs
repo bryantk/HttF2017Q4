@@ -20,7 +20,7 @@ public class GNM : NetworkManager
 	public bool IsClient { get { return _clientData != null; } }
 
 	private Dictionary<int, PlayerObject> _playerObjects = new Dictionary<int, PlayerObject>();
-
+	private Dictionary<int, GameObject> _TrackedObjects = new Dictionary<int, GameObject>();
 
 	void Awake()
 	{
@@ -136,10 +136,18 @@ public class GNM : NetworkManager
 		else if (netMsg.msgType == ILMsgType.SetPos)
 		{
 			var id = msg.SourceClient;
-			if (!_playerObjects.ContainsKey(id)) return;
-			
-			var pos = JsonUtility.FromJson<Vector3>(msg.message);
-			_playerObjects[id].transform.DOMove(pos, 0.1f);
+
+			if (_playerObjects.ContainsKey(id))
+			{
+				_playerObjects[id].transform.position = JsonUtility.FromJson<Vector3>(msg.message);
+			}
+			else if (_TrackedObjects.ContainsKey(id))
+			{
+				var interactable = _TrackedObjects[id].GetComponent<TextItem>();
+				if (interactable == null) return;
+
+				interactable.Drop(JsonUtility.FromJson<Vector3>(msg.message));
+			}
 		}
 		else if (netMsg.msgType == ILMsgType.MoveTo)
 		{
@@ -155,6 +163,16 @@ public class GNM : NetworkManager
 			if (!_playerObjects.ContainsKey(id)) return;
 
 			_playerObjects[id].Emote(msg.message);
+		}
+		else if (netMsg.msgType == ILMsgType.PickedUp)
+		{
+			var id = int.Parse(msg.message);
+			if (!_TrackedObjects.ContainsKey(id)) return;
+
+			var interactable = _TrackedObjects[id].GetComponent<TextItem>();
+			if (interactable == null) return;
+
+			interactable.PickUp();
 		}
 	}
 
@@ -269,6 +287,12 @@ public class GNM : NetworkManager
 		_myConnectionId = -2;
 	}
 
+
+	public void AddToTracked(int id, GameObject go)
+	{
+		_TrackedObjects.Add(id, go);
+	}
+
 }
 
 
@@ -281,7 +305,7 @@ public class ILMsgType
 	public static short RemoveId = MsgType.Highest + 4;
 	public static short MoveTo = MsgType.Highest + 5;
 	public static short Emote = MsgType.Highest + 6;
-
+	public static short PickedUp = MsgType.Highest + 7;
 };
 
 
