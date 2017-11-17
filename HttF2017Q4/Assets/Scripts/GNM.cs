@@ -386,7 +386,10 @@ public class GNM : NetworkManager
 	{
 		BaseCamera.depth = 2;
 		BaseCamera.transform.DOMove(new Vector3(0, 185, 10), 10).SetEase(Ease.InCubic);
-		BaseCamera.DOColor(new Color(0.2f, 0.39f, 0.7f), 10).SetEase(Ease.InCubic);
+		BaseCamera.DOColor(new Color(0.2f, 0.39f, 0.7f), 10).SetEase(Ease.InCubic).OnComplete(() =>
+		{
+			BaseCamera.transform.DORotate(Vector3.forward*-360, 20, RotateMode.LocalAxisAdd).SetEase(Ease.InOutSine).SetLoops(-1);
+		});
 		_clientData.PlayerScript.SetAsClient();
 		StartText.text = "The End";
 
