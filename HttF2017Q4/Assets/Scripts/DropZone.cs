@@ -7,8 +7,7 @@ public class DropZone : MonoBehaviour
 {
     [SerializeField] private Color _inactiveColor;
     [SerializeField] private Color _activeColor;
-    [TextArea]
-    [SerializeField] private string _defaultText = "\n...\n";
+    private string _defaultText = "\n<color=red>...<color=black>  ";
 
     [SerializeField]
     private LayerMask _itemLayer;
