@@ -126,7 +126,7 @@ public class PlayerObject : MonoBehaviour {
 							NavMeshHit meshHit;
 							NavMesh.FindClosestEdge(hit.point, out meshHit, NavMesh.AllAreas);
 							if (meshHit.distance < 1.5) break;
-							HUD.SelectedItem.Drop(hit.point, true, true);
+							HUD.SelectedItem.Drop(hit.point, true);
 							HUD.RemoveSelectedInventoryItem();
 							break;
 						}
