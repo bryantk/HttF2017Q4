@@ -14,12 +14,12 @@ public class ClientData : MonoBehaviour
 	/// </summary>
 	/// <param name="prefab"></param>
 	/// <returns></returns>
-	public PlayerObject CreatePlayer(GameObject prefab)
+	public PlayerObject CreatePlayer(GameObject prefab, int playerID)
 	{
 		var go = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 		PlayerScript = go.GetComponent<PlayerObject>();
 		PlayerScript.EventSystem = FindObjectOfType<EventSystem>();
-
+		PlayerScript.SetColor(playerID);
 		PlayerGameObject = go;
 		return PlayerScript;
 	}
