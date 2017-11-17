@@ -32,7 +32,9 @@ public class TextItem : MonoBehaviour
     public void PickUp(bool sendMessage = false)
     {
 		gameObject.SetActive(false);
-        if (AssociatedZone)
+	    TMP.gameObject.SetActive(true);
+
+		if (AssociatedZone)
         {
             AssociatedZone.ClearZone();
             AssociatedZone = null;
@@ -44,12 +46,11 @@ public class TextItem : MonoBehaviour
 	    }
     }
 
-    public void Drop(Vector3 location, bool sendMessage=false, bool showText=false)
+    public void Drop(Vector3 location, bool sendMessage=false)
     {
 		transform.position = location + Vector3.up * 2;
 
 		gameObject.SetActive(true);
-		TMP.gameObject.SetActive(showText);
 		if (sendMessage)
 		{
 			var data = new SpawnData() {PlayerId = ID, Position = location};
