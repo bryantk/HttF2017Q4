@@ -208,9 +208,8 @@ public class PlayerObject : MonoBehaviour {
 
 
 		Sequence mySequence = DOTween.Sequence();
-		mySequence.Append(emote.transform.DOLocalMoveY(2, 1));
+		mySequence.Append(emote.transform.DOLocalMoveY(3, 1).SetEase(Ease.OutBounce));
 		mySequence.AppendInterval(0.33f);
-		mySequence.SetEase(Ease.OutElastic);
 		mySequence.OnComplete(() => Destroy(emote));
 
 
