@@ -50,13 +50,13 @@ public class TextItem : MonoBehaviour
 	    }
     }
 
-    public void Drop(Vector3 location, bool sendMessage=false)
+    public void Drop(Vector3 location, bool sendMessage=false, bool showText=false)
     {
 		location.y += 2;
 		transform.position = location;
 
 		gameObject.SetActive(true);
-
+		TMP.gameObject.SetActive(showText);
 		if (sendMessage)
 		{
 			GNM.Instance.SendData(ILMsgType.SetPos, ID.ToString());

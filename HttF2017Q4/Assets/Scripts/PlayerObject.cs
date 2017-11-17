@@ -79,6 +79,23 @@ public class PlayerObject : MonoBehaviour {
 			switch (objectTag)
 			{
 				case "Map":
+					//Drop any selected item if possible
+					var path = new NavMeshPath();
+					if (HUD.SelectedItem != null)
+					{
+						//Can we get to the point clicked?
+						if (NavMesh.CalculatePath(Player.transform.position, hit.point, NavMesh.AllAreas, path))
+						{
+							//Is the point too close to the edge?
+							NavMeshHit meshHit;
+							NavMesh.FindClosestEdge(hit.point, out meshHit, NavMesh.AllAreas);
+							if (meshHit.distance < 1.5) break;
+							HUD.SelectedItem.Drop(hit.point, true, true);
+							HUD.RemoveSelectedInventoryItem();
+							break;
+						}
+					}
+					//Otherwise, move there
 					MoveTo(hit.point, true);
 					break;
 				case "Interactable":
