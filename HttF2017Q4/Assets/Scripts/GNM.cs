@@ -184,7 +184,7 @@ public class GNM : NetworkManager
 		}
 		else if (netMsg.msgType == ILMsgType.Pause)
 		{
-			Pause(msg.message == "true");
+			SetPause(msg.message == "true");
 		}
 	}
 
