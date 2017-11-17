@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -16,11 +17,14 @@ public class GNM : NetworkManager
 
 	public Camera BaseCamera;
 	public Transform Lobby;
+	public TextMeshPro StartText;
 
 	public static GNM Instance;
 
 	public bool IsServer { get { return _serverData != null; } }
 	public bool IsClient { get { return _clientData != null; } }
+
+	public int Players { get { return _playerObjects.Count; } }
 
 	private Dictionary<int, PlayerObject> _playerObjects = new Dictionary<int, PlayerObject>();
 	private Dictionary<int, GameObject> _TrackedObjects = new Dictionary<int, GameObject>();
@@ -373,7 +377,10 @@ public class GNM : NetworkManager
 	{
 		BaseCamera.depth = 2;
 		BaseCamera.transform.DOMove(new Vector3(0, 185, 10), 10).SetEase(Ease.InCubic);
-		BaseCamera.DOColor(Color.grey, 10).SetEase(Ease.InCubic);
+		BaseCamera.DOColor(new Color(0.2f, 0.39f, 0.7f), 10).SetEase(Ease.InCubic);
+		_clientData.PlayerScript.SetAsClient();
+		StartText.text = "The End";
+
 
 		if (sendMessage)
 		{

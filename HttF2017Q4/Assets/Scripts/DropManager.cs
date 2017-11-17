@@ -22,6 +22,9 @@ public class DropManager : MonoBehaviour
 
     private string _fullText;
 
+
+
+
     public void Generate(int numberOfZones)
     {
         foreach (DropZone zone in zones)
@@ -64,7 +67,9 @@ public class DropManager : MonoBehaviour
         _fullText = "";
         int currentID = 0;
         bool correctOrderSoFar = true;
-        foreach (DropZone zone in zones)
+	    Correct = false;
+
+		foreach (DropZone zone in zones)
         {
             _fullText += zone.GetCurrentText();
             if (zone.CurrentTextItem != null && zone.CurrentTextItem.ID > currentID)
@@ -85,5 +90,10 @@ public class DropManager : MonoBehaviour
     public void OrderCorrect()
     {
         Debug.Log("Order Is Correct!");
+	    Correct = true;
+
     }
+
+	public bool Correct;
+
 }
