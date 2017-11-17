@@ -406,7 +406,7 @@ public class GNM : NetworkManager
 
 		if (_gameStarted) return;
 
-		if (GUI.Button(new Rect(200, 330, 100, 50), "Start"))
+		if (GUI.Button(new Rect(200, 200, 200, 100), "All Players Ready - Start"))
 			StartGame(true);
 
 	}

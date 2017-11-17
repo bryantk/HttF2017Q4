@@ -65,11 +65,6 @@ public class PlayerObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (!_playerControlled) return;
-
-		var location = Fog.transform.position;
-		location.y = 0;
-		Fog.transform.position = location;
 
 		if (_navAgent.remainingDistance <= 0.5f && _moveAnim != null)
 		{
@@ -78,6 +73,14 @@ public class PlayerObject : MonoBehaviour {
 			_root.DOMoveY(0, 0.1f);
 			StartCoroutine(KillAnim());
 		}
+
+
+		if (!_playerControlled) return;
+
+		var location = Fog.transform.position;
+		location.y = 0;
+		Fog.transform.position = location;
+
 
 		// User input land
 		if (_paused) return;

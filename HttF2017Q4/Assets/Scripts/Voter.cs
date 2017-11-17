@@ -54,7 +54,7 @@ public class Voter : MonoBehaviour
 		}
 
 		var total = GNM.Instance.Players;
-		var need = Mathf.Max(Mathf.FloorToInt(total*0.75f), 0);
+		var need = Mathf.Max(Mathf.CeilToInt(total*0.75f), 0);
 
 		var left = Mathf.Max(need - Count, 0);
 		if (left > 0)
