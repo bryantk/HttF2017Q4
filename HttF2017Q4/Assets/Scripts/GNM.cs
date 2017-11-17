@@ -30,6 +30,7 @@ public class GNM : NetworkManager
 	private Dictionary<int, GameObject> _TrackedObjects = new Dictionary<int, GameObject>();
 
 	private bool _gameStarted;
+	private string ServerIP;
 
 	void Awake()
 	{
@@ -227,6 +228,12 @@ public class GNM : NetworkManager
 	public override void OnStartServer()
 	{
 		base.OnStartServer();
+
+		ServerIP = System.Net.Dns.GetHostName();
+		var ipEntry = System.Net.Dns.GetHostEntry(ServerIP);
+		var addr = ipEntry.AddressList;
+		ServerIP = addr[addr.Length - 1].ToString();
+
 		_serverData = gameObject.AddComponent<ServerData>();
 		_playerObjects = new Dictionary<int, PlayerObject>();
 		Debug.LogWarning("OnStartServer");
@@ -241,6 +248,7 @@ public class GNM : NetworkManager
 		NetworkServer.RegisterHandler(ILMsgType.SetItemPos, OnServerMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.Pause, OnServerMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.StartGame, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.EndGame, OnServerMessageRecieved);
 	}
 
 	public override void OnStopServer()
@@ -284,6 +292,7 @@ public class GNM : NetworkManager
 		client.RegisterHandler(ILMsgType.SetItemPos, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.Pause, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.StartGame, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.EndGame, OnClientMessageRecieved);
 	}
 
 	public override void OnClientConnect(NetworkConnection conn)
@@ -392,10 +401,13 @@ public class GNM : NetworkManager
 	void OnGUI()
 	{
 		if (!IsServer) return;
+
+		GUI.Label(new Rect(10, 10, 100, 20), ServerIP);
+
 		if (_gameStarted) return;
 
 		if (GUI.Button(new Rect(200, 330, 100, 50), "Start"))
-			StartGame();
+			StartGame(true);
 
 	}
 
