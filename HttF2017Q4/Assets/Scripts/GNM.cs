@@ -14,6 +14,9 @@ public class GNM : NetworkManager
 	private GNMHelpers _helperMethods;
 	private int _myConnectionId = -2;
 
+	public Camera BaseCamera;
+	public Transform Lobby;
+
 	public static GNM Instance;
 
 	public bool IsServer { get { return _serverData != null; } }
@@ -21,6 +24,8 @@ public class GNM : NetworkManager
 
 	private Dictionary<int, PlayerObject> _playerObjects = new Dictionary<int, PlayerObject>();
 	private Dictionary<int, GameObject> _TrackedObjects = new Dictionary<int, GameObject>();
+
+	private bool _gameStarted;
 
 	void Awake()
 	{
@@ -30,7 +35,6 @@ public class GNM : NetworkManager
 
 		_helperMethods = gameObject.AddComponent<GNMHelpers>();
 	}
-
 
 	/// <summary>
 	/// Send a message to all clients (or server first if you are a client)
@@ -191,6 +195,14 @@ public class GNM : NetworkManager
 		{
 			SetPause(msg.message == "True");
 		}
+		else if (netMsg.msgType == ILMsgType.StartGame)
+		{
+			StartGame();
+		}
+		else if (netMsg.msgType == ILMsgType.EndGame)
+		{
+			EndGame();
+		}
 	}
 
 
@@ -224,6 +236,7 @@ public class GNM : NetworkManager
 		NetworkServer.RegisterHandler(ILMsgType.PickedUp, OnServerMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.SetItemPos, OnServerMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.Pause, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.StartGame, OnServerMessageRecieved);
 	}
 
 	public override void OnStopServer()
@@ -266,10 +279,17 @@ public class GNM : NetworkManager
 		client.RegisterHandler(ILMsgType.PickedUp, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.SetItemPos, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.Pause, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.StartGame, OnClientMessageRecieved);
 	}
 
 	public override void OnClientConnect(NetworkConnection conn)
 	{
+		if (_gameStarted)
+		{
+			conn.Disconnect();
+			return;
+		}
+
 		base.OnClientConnect(conn);
 		
 		Debug.LogWarning("OnClientConnect: " + conn.connectionId);
@@ -338,14 +358,38 @@ public class GNM : NetworkManager
 	}
 
 
+	private void StartGame(bool sendMessage = false)
+	{
+		_gameStarted = true;
+		Lobby.DOMoveY(-2, 4).OnComplete(() => Destroy(Lobby.gameObject));
+
+		if (sendMessage)
+		{
+			SendData(ILMsgType.StartGame, "");
+		}
+	}
+
+	public void EndGame(bool sendMessage = false)
+	{
+		BaseCamera.depth = 2;
+		BaseCamera.transform.DOMove(new Vector3(0, 185, 10), 10).SetEase(Ease.InCubic);
+		BaseCamera.DOColor(Color.grey, 10).SetEase(Ease.InCubic);
+
+		if (sendMessage)
+		{
+			SendData(ILMsgType.EndGame, "");
+		}
+	}
+
+
 	void OnGUI()
 	{
 		if (!IsServer) return;
+		if (_gameStarted) return;
 
-		if (GUI.Button(new Rect(10, 330, 60, 20), "PAUSE"))
-			Pause(true);
-		if (GUI.Button(new Rect(10, 390, 60, 20), "no PAUSE"))
-			Pause(false);
+		if (GUI.Button(new Rect(200, 330, 100, 50), "Start"))
+			StartGame();
+
 	}
 
 }
@@ -363,6 +407,8 @@ public class ILMsgType
 	public static short PickedUp = MsgType.Highest + 7;
 	public static short SetItemPos = MsgType.Highest + 8;
 	public static short Pause = MsgType.Highest + 9;
+	public static short StartGame = MsgType.Highest + 10;
+	public static short EndGame = MsgType.Highest + 11;
 };
 
 

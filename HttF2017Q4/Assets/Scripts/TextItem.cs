@@ -12,22 +12,16 @@ public class TextItem : MonoBehaviour
 
     public int ID = 50;
 
-    private Rigidbody _myRigidbody;
-    private Collider _myCollider;
-    private Renderer[] rends;
     public DropZone AssociatedZone;
 
 
 
     void Awake()
     {
-        _myRigidbody = GetComponent<Rigidbody>();
-        _myCollider = GetComponent<Collider>();
-        rends = GetComponentsInChildren<Renderer>();
 
 	    TMP.text = Text;
 
-		transform.rotation = Quaternion.Euler(Vector3.up * Random.Range(-10f, 10f));
+		transform.rotation = Quaternion.Euler(Vector3.up * Random.Range(-15f, 15f));
     }
 
 	void Start()
