@@ -116,7 +116,6 @@ public class GNM : NetworkManager
 		}
 		else if (netMsg.msgType == ILMsgType.SpawnPlayer)
 		{
-			Debug.Log("Spawn");
 			var data = JsonUtility.FromJson<SpawnData>(msg.message);
 			if (data.PlayerId == _myConnectionId) return;
 
@@ -149,6 +148,14 @@ public class GNM : NetworkManager
 				interactable.Drop(JsonUtility.FromJson<Vector3>(msg.message));
 			}
 		}
+		else if (netMsg.msgType == ILMsgType.SetItemPos)
+		{
+			var data = JsonUtility.FromJson<SpawnData>(msg.message);
+			if (!_TrackedObjects.ContainsKey(data.PlayerId)) return;
+
+			var item = _TrackedObjects[data.PlayerId];
+			item.transform.position = data.Position;
+		}
 		else if (netMsg.msgType == ILMsgType.MoveTo)
 		{
 			var id = msg.SourceClient;
@@ -174,6 +181,10 @@ public class GNM : NetworkManager
 			if (interactable == null) return;
 
 			interactable.PickUp();
+		}
+		else if (netMsg.msgType == ILMsgType.Pause)
+		{
+			Pause(msg.message == "true");
 		}
 	}
 
@@ -206,6 +217,8 @@ public class GNM : NetworkManager
 		NetworkServer.RegisterHandler(ILMsgType.MoveTo, OnServerMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.Emote, OnServerMessageRecieved);
 		NetworkServer.RegisterHandler(ILMsgType.PickedUp, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.SetItemPos, OnServerMessageRecieved);
+		NetworkServer.RegisterHandler(ILMsgType.Pause, OnServerMessageRecieved);
 	}
 
 	public override void OnStopServer()
@@ -246,6 +259,8 @@ public class GNM : NetworkManager
 		client.RegisterHandler(ILMsgType.MoveTo, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.Emote, OnClientMessageRecieved);
 		client.RegisterHandler(ILMsgType.PickedUp, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.SetItemPos, OnClientMessageRecieved);
+		client.RegisterHandler(ILMsgType.Pause, OnClientMessageRecieved);
 	}
 
 	public override void OnClientConnect(NetworkConnection conn)
@@ -296,6 +311,38 @@ public class GNM : NetworkManager
 		_TrackedObjects.Add(id, go);
 	}
 
+
+	/// <summary>
+	/// Server command only
+	/// </summary>
+	/// <param name="shouldPause"></param>
+	public void Pause(bool shouldPause)
+	{
+		Debug.LogError("need to pause: " + shouldPause);
+		SendData(ILMsgType.Pause, shouldPause.ToString());
+		SetPause(shouldPause);
+	}
+
+	private void SetPause(bool shouldPause)
+	{
+		//foreach (var kv in _playerObjects)
+		//{
+		//	kv.Value.Paused = shouldPause;
+		//}
+		_clientData.PlayerScript.Paused = shouldPause;
+	}
+
+
+	void OnGUI()
+	{
+		if (!IsServer) return;
+
+		if (GUI.Button(new Rect(10, 330, 60, 20), "PAUSE"))
+			Pause(true);
+		if (GUI.Button(new Rect(10, 390, 60, 20), "no PAUSE"))
+			Pause(false);
+	}
+
 }
 
 
@@ -309,6 +356,8 @@ public class ILMsgType
 	public static short MoveTo = MsgType.Highest + 5;
 	public static short Emote = MsgType.Highest + 6;
 	public static short PickedUp = MsgType.Highest + 7;
+	public static short SetItemPos = MsgType.Highest + 8;
+	public static short Pause = MsgType.Highest + 9;
 };
 
 

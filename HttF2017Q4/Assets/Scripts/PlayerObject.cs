@@ -18,6 +18,9 @@ public class PlayerObject : MonoBehaviour {
 	public GameObject Fog;
 	public GameObject PlayerCamera;
 	public EventSystem EventSystem;
+
+	private bool _paused;
+
 	private bool _playerControlled = true;
 
 	private int _count;
@@ -28,25 +31,35 @@ public class PlayerObject : MonoBehaviour {
             _navAgent = GetComponent<NavMeshAgent>();
     }
 
-	// Use this for initialization
-	void Start()
+	public bool Paused
 	{
-
+		set
+		{
+			_paused = value;
+			_navAgent.isStopped = value;
+			_navAgent.ResetPath();
+		}
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (!_playerControlled) return;
+		if (Fog != null)
+		{
+			var location = Fog.transform.position;
+			location.y = 0;
+			Fog.transform.position = location;
+		}
+
+
+		if (!_playerControlled || _paused) return;
 
 		if (Input.GetMouseButton(0) && !EventSystem.IsPointerOverGameObject())
 		{
 			HandleClick();
 		}
 
-		var location = Fog.transform.position;
-		location.y = 0;
-		Fog.transform.position = location;
+		
 
 	}
 
@@ -143,4 +156,5 @@ public class PlayerObject : MonoBehaviour {
 		if (sendMessage)
 			GNM.Instance.SendDataUnreliable(ILMsgType.Emote, msgMessage);
 	}
+
 }

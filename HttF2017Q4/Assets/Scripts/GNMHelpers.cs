@@ -11,4 +11,5 @@ public class GNMHelpers : MonoBehaviour {
 		PlayerScript.SetAsClient();
 		return PlayerScript;
 	}
+
 }
