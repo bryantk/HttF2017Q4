@@ -17,6 +17,7 @@ public class PlayerObject : MonoBehaviour {
 	public GameObject Player;
 	public GameObject Fog;
 	public GameObject PlayerCamera;
+	public GameObject PlayerMesh;
 	public EventSystem EventSystem;
 
 	private bool _paused;
@@ -27,6 +28,19 @@ public class PlayerObject : MonoBehaviour {
 	private Transform _root;
 	private Sequence _moveAnim;
 
+	private readonly List<Color> _colors = new List<Color>
+	{
+		Color.red,
+		Color.blue,
+		Color.yellow,
+		Color.green,
+		Color.magenta,
+		Color.black,
+		Color.white,
+		Color.cyan,
+		Color.grey,
+		new Color(1f, .5f, 0f)
+	};
 
 	void Awake()
     {
@@ -205,4 +219,9 @@ public class PlayerObject : MonoBehaviour {
 			GNM.Instance.SendDataUnreliable(ILMsgType.Emote, msgMessage);
 	}
 
+	public void SetColor(int playerId)
+	{
+		var color = _colors[playerId];
+		PlayerMesh.GetComponent<Renderer>().material.color = color;
+	}
 }

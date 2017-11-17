@@ -115,7 +115,7 @@ public class GNM : NetworkManager
 		{
 			_myConnectionId = int.Parse(msg.message);
 			_clientData = gameObject.AddComponent<ClientData>();
-			var player = _clientData.CreatePlayer(playerPrefab);
+			var player = _clientData.CreatePlayer(playerPrefab, _myConnectionId);
 			player.name = "Player_" + _myConnectionId + "_me";
 			_playerObjects[_myConnectionId] = player;
 		}
@@ -128,7 +128,7 @@ public class GNM : NetworkManager
 			var data = JsonUtility.FromJson<SpawnData>(msg.message);
 			if (data.PlayerId == _myConnectionId) return;
 
-			var player = _helperMethods.CreateMirrorPlayer(playerPrefab);
+			var player = _helperMethods.CreateMirrorPlayer(playerPrefab, data.PlayerId);
 			player.transform.position = data.Position;
 			player.name = "Player_" + data.PlayerId;
 			_playerObjects.Add(data.PlayerId, player);
