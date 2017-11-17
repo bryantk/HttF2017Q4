@@ -150,11 +150,16 @@ public class GNM : NetworkManager
 		}
 		else if (netMsg.msgType == ILMsgType.SetItemPos)
 		{
-			var data = JsonUtility.FromJson<SpawnData>(msg.message);
-			if (!_TrackedObjects.ContainsKey(data.PlayerId)) return;
+			var itemData = JsonUtility.FromJson<SpawnData>(msg.message);
+			if (itemData == null)
+				Debug.LogError("WHY!");
+			if (!_TrackedObjects.ContainsKey(itemData.PlayerId)) return;
 
-			var item = _TrackedObjects[data.PlayerId];
-			item.transform.position = data.Position;
+			var item = _TrackedObjects[itemData.PlayerId];
+			var ti = item.GetComponent<TextItem>();
+			if (ti == null) return;
+
+			ti.Drop(itemData.Position);
 		}
 		else if (netMsg.msgType == ILMsgType.MoveTo)
 		{
@@ -184,7 +189,7 @@ public class GNM : NetworkManager
 		}
 		else if (netMsg.msgType == ILMsgType.Pause)
 		{
-			SetPause(msg.message == "true");
+			SetPause(msg.message == "True");
 		}
 	}
 

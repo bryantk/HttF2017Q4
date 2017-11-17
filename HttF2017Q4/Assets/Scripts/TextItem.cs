@@ -52,8 +52,7 @@ public class TextItem : MonoBehaviour
 
     public void Drop(Vector3 location, bool sendMessage=false, bool showText=false)
     {
-		location.y += 2;
-		transform.position = location;
+		transform.position = location + Vector3.up * 2;
 
 		gameObject.SetActive(true);
 		TMP.gameObject.SetActive(showText);

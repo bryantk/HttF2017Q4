@@ -168,7 +168,15 @@ public class PlayerObject : MonoBehaviour {
 		var emote = Instantiate(emotePrefab, transform);
 		emote.transform.position = Player.transform.position + Vector3.up;
 
-		emote.transform.DOMoveY(2, 2).OnComplete(()=>Destroy(emote));
+		//emote.transform.DOMoveY(2, 2).OnComplete(()=>Destroy(emote));
+
+
+		Sequence mySequence = DOTween.Sequence();
+		mySequence.Append(emote.transform.DOMoveY(2, 1));
+		mySequence.AppendInterval(0.33f);
+		mySequence.SetEase(Ease.OutBack);
+		mySequence.OnComplete(() => Destroy(emote));
+
 
 		if (sendMessage)
 			GNM.Instance.SendDataUnreliable(ILMsgType.Emote, msgMessage);
