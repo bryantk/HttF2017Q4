@@ -200,12 +200,7 @@ public class PlayerObject : MonoBehaviour {
 
 	public void Emote(string msgMessage, bool sendMessage = false)
 	{
-		Debug.Log("EMOTING: " + msgMessage);
-
-		var name = "emotes_angry";
-		if (msgMessage == "Happy")
-			name = "emotes_happy";
-		var emotePrefab = (GameObject)Resources.Load(name);
+		var emotePrefab = (GameObject)Resources.Load("emotes_" + msgMessage);
 		var emote = Instantiate(emotePrefab, transform);
 		emote.transform.position = Player.transform.position + Vector3.up;
 
@@ -225,7 +220,7 @@ public class PlayerObject : MonoBehaviour {
 
 	public void SetColor(int playerId)
 	{
-		var color = _colors[playerId];
+		var color = _colors[playerId % _colors.Count];
 		PlayerMesh.GetComponent<Renderer>().material.color = color;
 	}
 }
