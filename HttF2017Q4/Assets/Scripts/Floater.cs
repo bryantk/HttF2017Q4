@@ -16,6 +16,8 @@ public class Floater : MonoBehaviour
 	{
 		transform.DOMoveY(MinY, 0);
 
+		TTM += Random.Range(-1f, 1f);
+
 		Sequence mySequence = DOTween.Sequence();
 		mySequence.Append(transform.DOMoveY(MaxY, TTM));
 		mySequence.AppendInterval(0.25f);
