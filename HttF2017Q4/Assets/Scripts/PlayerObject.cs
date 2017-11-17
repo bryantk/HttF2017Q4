@@ -71,10 +71,11 @@ public class PlayerObject : MonoBehaviour {
 		location.y = 0;
 		Fog.transform.position = location;
 
-		if (_navAgent.remainingDistance <= 0.2f && _moveAnim != null)
+		if (_navAgent.remainingDistance <= 0.5f && _moveAnim != null)
 		{
 			_anim.speed = 1;
 			_moveAnim.Kill(true);
+			_root.DOMoveY(0, 0.1f);
 			StartCoroutine(KillAnim());
 		}
 

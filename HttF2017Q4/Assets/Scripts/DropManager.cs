@@ -82,7 +82,6 @@ public class DropManager : MonoBehaviour
             }
         }
         _textMeshGround.text = _fullText;
-
         if (correctOrderSoFar)
             OrderCorrect();
     }

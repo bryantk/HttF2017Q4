@@ -441,6 +441,91 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 76640467}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &87791357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 87791358}
+  - component: {fileID: 87791361}
+  - component: {fileID: 87791360}
+  - component: {fileID: 87791359}
+  m_Layer: 0
+  m_Name: Cube (18)
+  m_TagString: Map
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &87791358
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87791357}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16, y: -0.25, z: 6}
+  m_LocalScale: {x: 4, y: 8, z: 4}
+  m_Children: []
+  m_Father: {fileID: 1922768099}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &87791359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87791357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318e5a8400f0ec6468aad3c26957d970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinY: -1
+  MaxY: 4
+  TTM: 12
+  EaseType: 4
+--- !u!23 &87791360
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87791357}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 80cb2ca4dc4c9af4e87057eac304de0d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &87791361
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 87791357}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &90716933
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +684,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "we have got enough food at present.\"\r"
+      value: 'we have got enough food at present." '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -1337,9 +1422,9 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4278190080
   m_fontSize: 12
-  m_fontSizeBase: 36
+  m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 3
   m_fontSizeMax: 12
   m_fontStyle: 0
@@ -2593,7 +2678,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -38.5
+      value: -5.31
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2601,7 +2686,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -16.5
+      value: 1.72
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2630,8 +2715,8 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "The grasshopper invited the ant to sit for a chat with him. But the
-        ant refused\r"
+      value: 'The grasshopper invited the ant to sit for a chat with him. But the
+        ant refused '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -3538,7 +3623,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11.94
+      value: -37.87
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3546,7 +3631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -11.57
+      value: -17.19
       objectReference: {fileID: 0}
     - target: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3575,7 +3660,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: 'It is best to prepare for the days of necessity. '
+      value: It is best to prepare for the days of necessity.  -Fin
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -3913,7 +3998,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "while it saw the ants distributing corn and grain from their storage.\r"
+      value: 'while it saw the ants distributing corn and grain from their storage. '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -5164,7 +5249,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "the Grasshopper found itself dying of hunger,\r"
+      value: 'the Grasshopper found itself dying of hunger, '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -5752,7 +5837,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: Complete the Story to win... something.
+      value: '- Its Dangerous to leave an incomplete Story outside!!! -'
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -6087,7 +6172,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: '"Pooh! Why bother about winter?" said the Grasshopper;'
+      value: ' Why bother about winter?" said the Grasshopper; '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -6510,10 +6595,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12
-  m_fontSizeBase: 36
+  m_fontSize: 8
+  m_fontSizeBase: 8
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 3
   m_fontSizeMax: 12
   m_fontStyle: 0
@@ -7515,7 +7600,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "But the Ant went on its way and continued its toil.\r"
+      value: 'But the Ant went on its way and continued its toil. '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -10069,7 +10154,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "Then the Grasshopper understood that\u2026"
+      value: 'Then the Grasshopper understood that - '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -13813,8 +13898,8 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: "saying that \"I\u2019m storing up food for winter\". \" Why don\u2019t
-        you do the same?\"\r"
+      value: "saying that \"I\u2019m storing up food for winter\".\n\"Why don\u2019t
+        you "
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -14220,7 +14305,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: ' asked the ant to the grasshopper.'
+      value: 'do the same?" asked the ant to the grasshopper. "Pooh! '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -15141,7 +15226,7 @@ Prefab:
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
       propertyPath: Text
-      value: Finally, when winter came,
+      value: 'Finally, when winter came, '
       objectReference: {fileID: 0}
     - target: {fileID: 114677094216484220, guid: 5937dc333e19c2e46af712ad730d47bf,
         type: 2}
@@ -16291,6 +16376,8 @@ Transform:
   - {fileID: 1202573246}
   - {fileID: 221364255}
   - {fileID: 2130174623}
+  - {fileID: 87791358}
+  - {fileID: 1929338886}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16299,6 +16386,91 @@ Transform:
   m_PrefabParentObject: {fileID: 4256730757098000, guid: 5937dc333e19c2e46af712ad730d47bf,
     type: 2}
   m_PrefabInternal: {fileID: 363912234}
+--- !u!1 &1929338885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1929338886}
+  - component: {fileID: 1929338889}
+  - component: {fileID: 1929338888}
+  - component: {fileID: 1929338887}
+  m_Layer: 0
+  m_Name: Cube (19)
+  m_TagString: Map
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!4 &1929338886
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929338885}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26, y: -0.25, z: -8}
+  m_LocalScale: {x: 2, y: 4, z: 2}
+  m_Children: []
+  m_Father: {fileID: 1922768099}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1929338887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929338885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318e5a8400f0ec6468aad3c26957d970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinY: 1
+  MaxY: 2.5
+  TTM: 4
+  EaseType: 7
+--- !u!23 &1929338888
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929338885}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 80cb2ca4dc4c9af4e87057eac304de0d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1929338889
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929338885}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1940500077
 GameObject:
   m_ObjectHideFlags: 0
