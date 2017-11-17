@@ -59,7 +59,8 @@ public class TextItem : MonoBehaviour
 		TMP.gameObject.SetActive(showText);
 		if (sendMessage)
 		{
-			GNM.Instance.SendData(ILMsgType.SetPos, ID.ToString());
+			var data = new SpawnData() {PlayerId = ID, Position = location};
+			GNM.Instance.SendData(ILMsgType.SetItemPos, JsonUtility.ToJson(data));
 		}
 	}
 
