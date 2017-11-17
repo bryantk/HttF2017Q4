@@ -23,12 +23,19 @@ public class PlayerObject : MonoBehaviour {
 
 	private bool _playerControlled = true;
 
-	private int _count;
+	private Animator _anim;
+	private Transform _root;
+	private Sequence _moveAnim;
 
-    void Awake()
+
+	void Awake()
     {
         if (_navAgent == null)
             _navAgent = GetComponent<NavMeshAgent>();
+
+	    _anim = GetComponentInChildren<Animator>();
+	    _root = Player.transform.GetChild(0);
+
     }
 
 	public bool Paused
@@ -44,23 +51,32 @@ public class PlayerObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (Fog != null)
+		if (!_playerControlled) return;
+
+		var location = Fog.transform.position;
+		location.y = 0;
+		Fog.transform.position = location;
+
+		if (_navAgent.remainingDistance <= 0.2f && _moveAnim != null)
 		{
-			var location = Fog.transform.position;
-			location.y = 0;
-			Fog.transform.position = location;
+			_anim.speed = 1;
+			_moveAnim.Kill(true);
+			StartCoroutine(KillAnim());
 		}
 
-
-		if (!_playerControlled || _paused) return;
+		// User input land
+		if (_paused) return;
 
 		if (Input.GetMouseButton(0) && !EventSystem.IsPointerOverGameObject())
 		{
 			HandleClick();
 		}
+	}
 
-		
-
+	IEnumerator KillAnim()
+	{
+		yield return null;
+		_moveAnim = null;
 	}
 
 	public void SetAsClient()
@@ -79,7 +95,14 @@ public class PlayerObject : MonoBehaviour {
 	    rot.z = 0;
 		Player.transform.rotation = Quaternion.Euler(rot);
 
-    }
+	    if (_navAgent.remainingDistance <= 0.2f || _moveAnim != null) return;
+		_anim.speed = 2;
+		_moveAnim = DOTween.Sequence();
+		_moveAnim.Append(_root.DOLocalMoveY(1, 0.4f).SetEase(Ease.InOutCubic));
+		_moveAnim.Append(_root.DOLocalMoveY(0, 0.4f).SetEase(Ease.OutCubic));
+		_moveAnim.AppendInterval(0.33f);
+		_moveAnim.SetLoops(-1);
+	}
 
 	private void HandleClick()
 	{
@@ -152,7 +175,7 @@ public class PlayerObject : MonoBehaviour {
 	public void MoveTo(Vector3 location, bool sendMessage = false)
 	{
 		MoveToLocation(location);
-
+		
 		if (sendMessage)
 			GNM.Instance.SendData(ILMsgType.MoveTo, JsonUtility.ToJson(location));
 	}
@@ -172,9 +195,9 @@ public class PlayerObject : MonoBehaviour {
 
 
 		Sequence mySequence = DOTween.Sequence();
-		mySequence.Append(emote.transform.DOMoveY(2, 1));
+		mySequence.Append(emote.transform.DOLocalMoveY(2, 1));
 		mySequence.AppendInterval(0.33f);
-		mySequence.SetEase(Ease.OutBack);
+		mySequence.SetEase(Ease.OutElastic);
 		mySequence.OnComplete(() => Destroy(emote));
 
 

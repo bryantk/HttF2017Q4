@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4274906600660696}
   - component: {fileID: 33329584112017306}
   - component: {fileID: 23739486466997786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4242333651762404}
   - component: {fileID: 33453846295378898}
   - component: {fileID: 23345772102117796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 222015876148110126}
   - component: {fileID: 114960790199084564}
   - component: {fileID: 114152465375073856}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4534599370285960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224414513048656550}
   - component: {fileID: 114537095479393598}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Emoticons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 222590247881939624}
   - component: {fileID: 114941761503363800}
   - component: {fileID: 114344303930238922}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Happy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 114032116037529044}
   - component: {fileID: 114398721884675226}
   - component: {fileID: 195661437593336688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerRig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 222632284854155126}
   - component: {fileID: 114703447829250978}
   - component: {fileID: 114983106324340950}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224412870227995210}
   - component: {fileID: 114602306855678770}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 222998512906571946}
   - component: {fileID: 114120742150830692}
   - component: {fileID: 114978050628086128}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slot 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,8 +192,24 @@ GameObject:
   - component: {fileID: 4828529865677990}
   - component: {fileID: 33503046528186554}
   - component: {fileID: 23925576715692372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1533715574553844
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4833666904081272}
+  - component: {fileID: 95169872926481576}
+  m_Layer: 8
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -209,7 +225,7 @@ GameObject:
   - component: {fileID: 224061282228857262}
   - component: {fileID: 222939596560403390}
   - component: {fileID: 114688396201279830}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +240,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4889129594444482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +257,7 @@ GameObject:
   - component: {fileID: 224178761875283352}
   - component: {fileID: 222238368436103516}
   - component: {fileID: 114808112398861354}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +275,7 @@ GameObject:
   - component: {fileID: 223960047659212880}
   - component: {fileID: 114175131881286698}
   - component: {fileID: 114054749226484692}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HUD Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +292,7 @@ GameObject:
   - component: {fileID: 4434676418901308}
   - component: {fileID: 33554696856945204}
   - component: {fileID: 23083023804711786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +310,7 @@ GameObject:
   - component: {fileID: 222518649419091628}
   - component: {fileID: 114719633242280586}
   - component: {fileID: 114467784617257772}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Sad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +328,7 @@ GameObject:
   - component: {fileID: 33340563818798850}
   - component: {fileID: 136395781043380086}
   - component: {fileID: 23056571477537614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +346,7 @@ GameObject:
   - component: {fileID: 222618131926942006}
   - component: {fileID: 114885566369717892}
   - component: {fileID: 114332784434461916}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Slot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +363,7 @@ GameObject:
   - component: {fileID: 4244895716140722}
   - component: {fileID: 33516636189358598}
   - component: {fileID: 23563804659971484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +382,7 @@ GameObject:
   - component: {fileID: 92858995253596826}
   - component: {fileID: 124529850459297074}
   - component: {fileID: 81575283807324804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -383,7 +399,7 @@ GameObject:
   - component: {fileID: 224605616839164310}
   - component: {fileID: 222522470499224608}
   - component: {fileID: 114236186927338076}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,6 +515,21 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.195, z: 0.19}
   m_LocalScale: {x: 0.75, y: 0.2, z: 0.5}
   m_Children: []
+  m_Father: {fileID: 4833666904081272}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4833666904081272
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1533715574553844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4828529865677990}
+  - {fileID: 4974208161152520}
   m_Father: {fileID: 4889129594444482}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -512,8 +543,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4828529865677990}
-  - {fileID: 4974208161152520}
+  - {fileID: 4833666904081272}
   m_Father: {fileID: 4435780557170616}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -523,11 +553,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1805344745164606}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4889129594444482}
+  m_Father: {fileID: 4833666904081272}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20642679343381530
@@ -814,6 +844,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1886760140149020}
   m_Enabled: 1
+--- !u!95 &95169872926481576
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1533715574553844}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dffd1fa09cbdd3341adbcd280916d502, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114032116037529044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1754,7 +1801,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.25
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!222 &222015876148110126
